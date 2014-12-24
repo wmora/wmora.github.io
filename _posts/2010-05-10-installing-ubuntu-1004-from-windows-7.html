@@ -1,0 +1,14 @@
+--- 
+layout: post
+title: Installing Ubuntu 10.04 from Windows 7
+date: "2010-05-10T00:44:00.000-03:00"
+author: William Mora
+tags: 
+- windows 7
+- ubuntu 10.04
+- wubi
+- virtual clonedrive
+permalink: /2010/05/installing-ubuntu-1004-from-windows-7.html
+---
+
+I launched the wubi installer from Windows 7 to install Ubuntu 10.04 and after a 2 hour wait the installation failed due to the following error:<br /><br />—<br /><code>Permission denied<br />For more information, please see the log file: C:\users\owner\appdata\local\temp\wubi-10.04-rev189.log</code><br />—<br /><br />After reviewing the log, it seems like the wubi installer can’t read the files within the appdata folder mentioned above.<br /><br />So my workaround was the following:<br /><br />I downloaded a tool for creating a virtual drive called Virtual CloneDrive (more info and download <a href="http://virtual-clonedrive.en.softonic.com/">here</a>, and don’t worry, it’s free) and mounted the Ubuntu .iso there, ran the installation and about 25 minutes later, I had successfully installed Ubuntu 10.04.

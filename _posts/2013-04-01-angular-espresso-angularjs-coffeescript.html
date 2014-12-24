@@ -1,0 +1,20 @@
+--- 
+layout: post
+title: Angular Espresso - AngularJS, CoffeeScript and Express
+date: "2013-04-01T22:29:00.001-03:00"
+author: William Mora
+tags: 
+- socket.io
+- angularjs
+- angular-espresso
+- coffeescript
+- node.js
+- git
+- github
+- mongoose
+- express
+- mocha
+permalink: /2013/04/angular-espresso-angularjs-coffeescript.html
+---
+
+<p><i><b>UPDATE:</b> This post is now outdated. Check out the project's <a href="http://wmora.github.io/angular-espresso/">git page</a> for the latest info on Angular Espresso.</i></p> <p><a href="http://angularjs.org/">AngularJS</a> is a powerful framework maintained by Google. I started playing around with it a few weeks ago and I think it is great for developing web apps. If you are a used to using <a href="http://jquery.com/">jQuery</a> for DOM manipulation and/or your views' logic, you'll have to change your approach and change the way you write dynamic views. Best of all, AngularJS is more than that: you could also have models, controllers, services and use partial views to develop a true, behavior-driven web app.</p> <p>The AngularJS team has an <a href="https://github.com/angular/angular-seed">angular-seed</a> project that is very useful as a starting point for an AnglarJS app. There's also an <a href="https://github.com/btford/angular-express-seed">extension</a> of that project that integrates <a href="http://expressjs.com/">Express</a> with AngularJS.</p> <p>Both of those projects are great. Based on them, I created a starting point for an AngularJS project, powered by <a href="http://nodejs.org/">Node.js</a> and Express at the backend, all written in <a href="http://coffeescript.org/">CoffeeScript</a>. The result is <a href="http://wmora.github.com/angular-espresso/">Angular Espresso</a>.</p> <p>Besides rewriting some of the angular-seed project in CoffeeScript, I included a more complete template that hopefully serves as a starting point for some powerful web apps. Some of its key points are:</p> <ul><li>Socket.IO: <a href="http://socket.io/">Socket.IO</a> is included as a service. As it is, it implements the "on" and "emit" functions.</li><li>Web Service: The "User" service is an example of how the project should be developed. Call a web service from your client app to your Express server and let the server handle all the logic, even if it's just a proxy to an external service.</li><li>Partial Views and Jade: Use <a href="http://jade-lang.com/">Jade</a> as the template engine for your views and partial views. In your server, define the top-level views and let AngularJS handle the rest of the views with a <code>$routeProvider</code> config.</li></ul> <p>Once you download the project, you'll need to install the dependencies with npm and build/run the project using its Cakefile. Take a look at the <a href="http://wmora.github.com/angular-espresso/">project's documentation</a> for more info. Long story short, the <code>app</code> folder contains all <code>.coffee</code> files. Each folder has a README file with a brief description. It compiles into a module called <code>.espresso</code> that it is run by the top-level <code>app</code> file. All client <code>.js</code> files are uglified using <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a>.</p> <p>In the future I'd like to add some kind of Model support for the server (<a href="http://mongoosejs.com/">Mongoose</a>, maybe?) as well as testing support (probably <a href="http://visionmedia.github.com/mocha/">Mocha</a>).</p>
