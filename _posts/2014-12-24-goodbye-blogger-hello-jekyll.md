@@ -1,5 +1,4 @@
 --- 
-layout: post
 title: Goodbye Blogger, Hello Jekyll!
 author: William Mora
 tags: 

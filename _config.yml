@@ -6,8 +6,8 @@ baseurl: ""
 url: "http://www.williammora.com"
 twitter_username: _williammora
 github_username: wmora
-disqus_username: false
-isso_domain: comments.mysite.org
+disqus_username: williammora
+isso_domain: 
 
 # Build settings
 markdown: redcarpet
