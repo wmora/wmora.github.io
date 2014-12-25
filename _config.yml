@@ -1,2 +1,24 @@
+# Site settings
+title: William Mora
+email: william.r.mora@gmail.com
+description: "Really cool blog about ... something"
+baseurl: ""
+url: "http://www.williammora.com"
+twitter_username: _williammora
+github_username: wmora
+disqus_username: false
+isso_domain: comments.mysite.org
+
+# Build settings
+markdown: redcarpet
 source: .
 permalink: /:title.html
+
+excerpt_separator: "<!--more-->"
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"

@@ -1,0 +1,92 @@
+body {
+    font-family: "Source Sans Pro", "Calibri", "Helvetica", sans-serif;
+    font-weight: 200;
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin: 0;
+    font-size: calc(.6vmax + .8em);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Gentium Basic", serif;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+a, a#selected {
+    transition: color .2s ease-out;
+    color: #46e;
+    text-decoration: none;
+}
+
+a:hover {
+    color: gray;
+}
+
+header a, footer a {
+    color: inherit;
+}
+
+/*a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover, a#selected {
+    text-decoration: underline;
+}*/
+
+nav ul {
+    padding: 1em 0;
+    margin: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10%;
+}
+
+h1 a {
+    font-size: 1.2em;
+    line-height: 1.4em;
+}
+
+pre {
+    overflow: auto;
+    padding: 1em;
+    font-size: .8em;
+    line-height: 1.4em;
+}
+
+blockquote {
+    border-left: 5px solid #46e;
+    margin: 0;
+    padding: 0 1em;
+}
+
+article {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+article header p {
+    color: dimgray;
+}
+
+article footer a::after {
+    content: "\00bb";
+}
+
+article header, body > footer {
+    text-align: center;
+}
+
+body > header, body > footer {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+body > footer span {
+    margin: 0 5%;
+}

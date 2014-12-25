@@ -1,0 +1,19 @@
+body {
+    padding: 0 calc(27% - 6em);
+    background: whitesmoke;
+}
+
+body > header, article, body > footer {
+    padding-left: calc(12% - 1.6em);
+    padding-right: calc(12% - 1.6em);
+}
+
+body > header, body > footer {
+    background: black;
+    color: white;
+}
+
+article {
+    background: white;
+    border-top: 1px solid gainsboro;
+}
