@@ -56,9 +56,9 @@ int calendarField, SimpleDateFormat dateFormat) {
         if (!calendarFieldOK(calendarField)) {
             throw new IllegalArgumentException("invalid calendarField");
         }
-        if ( !(((start == null) || (start.compareTo(value) &amp; lt;=0))&amp;&amp;
-        ((end == null) || (end.compareTo(value) &amp; gt;=0)))){
-            throw new IllegalArgumentException("(start &lt;= value &lt;= end) is false");
+        if ( !(((start == null) || (start.compareTo(value) <= 0)) &&
+        ((end == null) || (end.compareTo(value) >= 0)))){
+            throw new IllegalArgumentException("(start <= value <= end) is false");
         }
         this.value = value;
         this.start = start;
@@ -104,8 +104,7 @@ int calendarField, SimpleDateFormat dateFormat) {
         cal.setTime(value);
         cal.add(calendarField, 1);
         Date next = cal.getTime();
-        return (end == null) || (end.compareTo(next) &amp; gt;=0)?next:
-        null;
+        return (end == null) || (end.compareTo(next) >= 0) ? next: null;
     }
 
     @Override
@@ -114,7 +113,7 @@ int calendarField, SimpleDateFormat dateFormat) {
         cal.setTime(value);
         cal.add(calendarField, -1);
         Date prev = cal.getTime();
-        return ((start == null) || (start.compareTo((prev)) &lt;= 0)) ? prev : null;
+        return ((start == null) || (start.compareTo((prev)) <= 0)) ? prev : null;
     }
 
     @Override
@@ -127,7 +126,7 @@ int calendarField, SimpleDateFormat dateFormat) {
         if (value == null) {
             throw new NullPointerException("Date is null!");
         } else {
-            if ((value instanceof String) &amp;&amp; ((String) value).matches("[0-9]+[/][0-9]+[/][0-9]+")) {
+            if ((value instanceof String) && ((String) value).matches("[0-9]+[/][0-9]+[/][0-9]+")) {
                 String date = ((String) value);
                 int day = Integer.parseInt(date.substring(0, 2));
                 int month = Integer.parseInt(date.substring(3, 5));
