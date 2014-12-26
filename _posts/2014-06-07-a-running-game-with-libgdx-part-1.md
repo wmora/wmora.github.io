@@ -16,8 +16,8 @@ assets_url: /assets/libgdx-cityescape-tutorial
 I've always liked 2d running games. When I first got an Android phone, I played [iRunner](https://play.google.com/store/apps/details?id=com.droidhen.irunner) for hours, and at the time I seriously wanted to develop a game like that. A lot of time has passed since but I finally had the time to put together a simple, running game using [libGDX](http://libgdx.badlogicgames.com/). A final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 LibGDX is one of the nicest projects I've followed over the past few years and when I began looking into different video game development frameworks, it was definitely the one that provided the most features and provided the best performance for my then crappy phone :). If you have time, I recommend reading its creator's [post](http://www.badlogicgames.com/wordpress/?p=3412) on releasing version 1.0.
-<!--more-->
 
+<!--more-->
 I developed this game as a learning exercise using libGDX's [scene2d](https://github.com/libgdx/libgdx/wiki/Scene2d) and [box2d](https://github.com/libgdx/libgdx/wiki/Box2d) libraries on my spare time. The code is by no means perfect, but I hope it helps you get on the right track if you are looking to develop The Next Awesome Game. Also, even though libGDX is a cross-platform framework, I only targeted Android as my final release platform and I targeted desktop for testing purposes.
 
 **_NOTE: I won't be explaining much related to libGDX or box2d as they already have excellent documentation. I'm only guiding you through my own implementation of a game using these tools. If you don't understand why I'm using a particular class or what a physics body is I strongly suggest taking a look at libGDX's [wiki](https://github.com/libgdx/libgdx/wiki)&nbsp;before moving forward._**

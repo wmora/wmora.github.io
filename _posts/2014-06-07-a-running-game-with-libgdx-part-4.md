@@ -18,8 +18,8 @@ Check out [part 2](http://www.williammora.com/2014/06/a-running-game-with-libgdx
 We introduced our enemies on [part 3](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-3.html).
 
 This is part 4 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
-<!--more-->
 
+<!--more-->
 ## Graphics Would Be Nice!
 This is the part where you should really make the game your own instead of using the resources from here; I am going to be adding textures to the game. We are going to do the following:
 

@@ -20,8 +20,8 @@ screenshot_width: 180
 This library project is on [GitHub](https://github.com/nispok/snackbar) along with an example app.
 
 Google's [Material Design documentation](http://www.google.com/design/spec/material-design/introduction.html) introduces a new component used for quick feedback called [Snackbars](http://www.google.com/design/spec/components/snackbars-and-toasts.html). The document describes them as follows:
-<!--more-->
 
+<!--more-->
 > Snackbars provide lightweight feedback about an operation in a small popup at the base of the screen on mobile and at the lower left on desktop. They are above all over elements on screen, including the floating action button. 
 > 
 > They automatically disappear after a timeout or after user interaction elsewhere on the screen, whichever comes first. Snackbars can be swiped off screen. They do not block input on the screens they appear on and cannot receive input focus. Show only one snackbar on screen at a time.Here are a couple of screenshots of how they should look:

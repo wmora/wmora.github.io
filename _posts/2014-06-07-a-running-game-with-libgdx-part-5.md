@@ -20,8 +20,8 @@ We introduced our enemies on [part 3](http://www.williammora.com/2014/06/a-runni
 We rendered our background and ground on [part 4](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-4.html).
 
 Remember the code is on [GitHub](https://github.com/wmora/cityescape). Graphics were made by [Kenney](http://www.kenney.nl/). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
-<!--more-->
 
+<!--more-->
 ## Where Are My Characters?
 If are coming from the [previous part](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-4.html), you probably know that we stopped showing our runner and the enemies but hey, at least the background and the ground are looking good! In this next part we are going to display our characters again.
 
