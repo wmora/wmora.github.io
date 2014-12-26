@@ -13,6 +13,8 @@ tags:
 - Android
 - material design
 permalink: /2014/08/snackbar-android-library.html
+assets_url: /assets/snackbar-android-library
+screenshot_width: 180
 ---
 
 This library project is on [GitHub](https://github.com/nispok/snackbar) along with an example app.
@@ -26,70 +28,149 @@ Google's [Material Design documentation](http://www.google.com/design/spec/mater
 
 Since there's no native widget for this (at least not yet), I created a small Android library to quickly include this component on top of any activity. It only supports phones; it would still pop up at the base of the screen on tablets/desktops. 
 
-Using the `Snackbar` class is easy, this is how you would display it on an `Activity`: 
+Using the `Snackbar` class is easy, this is how you would display it on an `Activity`:
 
 ```java
 Snackbar.with(getApplicationContext()) // context
     .text("Single-line snackbar") // text to display
     .show(this); // activity where it is displayed
 ```
-
-If you want an action button to be displayed, just assign a label and an `ActionClickListener`: 
+However, I recommend you use the `SnackbarManager` to handle the Snackbars queue:
 
 ```java
-Snackbar.with(getApplicationContext()) // context
-    .text("Item deleted") // text to display
-    .actionLabel("Undo") // action button label
-    .actionListener(new Snackbar.ActionClickListener() {
-        @Override
-        public void onActionClicked() {
-            Log.d(TAG, "Undoing something");
-        }
-     }) // action button's ActionClickListener
-     .show(this); // activity where it is displayed
+// Dismisses the Snackbar being shown, if any, and displays the new one
+SnackbarManager.show(
+    Snackbar.with(myActivity)
+    .text("Single-line snackbar"));
+```
+If you are using `getApplicationContext()` as the `Context` to create the `Snackbar` then you must
+specify the target `Activity` when calling the `SnackbarManager`:
+
+```java
+// Dismisses the Snackbar being shown, if any, and displays the new one
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext())
+    .text("Single-line snackbar"), myActivity);
+```
+If you want an action button to be displayed, just assign a label and an `ActionClickListener`:
+
+```java
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext()) // context
+        .text("Item deleted") // text to display
+        .actionLabel("Undo") // action button label
+        .actionListener(new ActionClickListener() {
+            @Override
+            public void onActionClicked(Snackbar snackbar) {
+                Log.d(TAG, "Undoing something");
+            }
+        }) // action button's ActionClickListener
+     , this); // activity where it is displayed
+```
+If you need to know when the `Snackbar` is shown or dismissed, assign a `EventListener` to it.
+This is useful if you need to move other objects while the `Snackbar` is displayed. For instance,
+you can move a Floating Action Button up while the `Snackbar` is on screen:
+
+```java
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext()) // context
+        .text("This will do something when dismissed") // text to display
+        .eventListener(new EventListener() {
+            @Override
+            public void onShow(Snackbar snackbar) {
+                myFloatingActionButton.moveUp(snackbar.getHeight());
+            }
+            @Override
+            public void onShown(Snackbar snackbar) {
+                Log.i(TAG, String.format("Snackbar shown. Width: %d Height: %d Offset: %d",
+                        snackbar.getWidth(), snackbar.getHeight(),
+                        snackbar.getOffset()));
+            }
+            @Override
+            public void onDismiss(Snackbar snackbar) {
+                myFloatingActionButton.moveDown(snackbar.getHeight());
+            }
+            @Override
+            public void onDismissed(Snackbar snackbar) {
+                Log.i(TAG, String.format("Snackbar dismissed. Width: %d Height: %d Offset: %d",
+                                    snackbar.getWidth(), snackbar.getHeight(),
+                                    snackbar.getOffset()));
+            }
+        }) // Snackbar's EventListener
+    , this); // activity where it is displayed
+```
+There are two `Snackbar` types: single-line (default) and multi-line (2 lines max). You can also set
+the duration of the `Snackbar` similar to a
+<a href="http://developer.android.com/reference/android/widget/Toast.html">`Toast`</a>.
+
+The lengths of a Snackbar duration are:
+* LENGTH_SHORT: 2s
+* LENGTH_LONG: 3.5s
+* LENGTH_INDEFINTE: Indefinite; ideal for persistent errors
+
+You could also set a custom duration.
+
+Animation disabling is also possible.
+
+```java
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext()) // context
+        .type(Snackbar.SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+        .text("This is a multi-line snackbar. Keep in mind that snackbars are " +
+            "meant for VERY short messages") // text to be displayed
+        .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+        .animation(false) // don't animate it
+    , this); // where it is displayed
+```
+You can also change the `Snackbar`'s colors.
+
+```java
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext()) // context
+        .text("Different colors this time") // text to be displayed
+        .textColor(Color.GREEN) // change the text color
+        .color(Color.BLUE) // change the background color
+        .actionLabel("Action") // action button label
+        .actionColor(Color.RED) // action button label color
+        .actionListener(new ActionClickListener() {
+            @Override
+            public void onActionClicked(Snackbar snackbar) {
+                Log.d(TAG, "Doing something");
+            }
+         }) // action button's ActionClickListener
+    , this); // activity where it is displayed
+```
+Finally, you can attach the `Snackbar` to a AbsListView (ListView, GridView) or a RecyclerView.
+
+```java
+SnackbarManager.show(
+    Snackbar.with(getApplicationContext()) // context
+        .type(Snackbar.SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+        .text(R.string.message) // text to be displayed
+        .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
+        .animation(false) // don't animate it
+        .attachToAbsListView(listView) // Attach to ListView - attachToRecyclerView() is for RecyclerViews
+        , this); // where it is displayed
+```
+It uses [Roman Nurik's SwipeToDismiss sample code](https://github.com/romannurik/android-swipetodismiss)
+to implement the swipe-to-dismiss functionality. This is enabled by default. You can disable this if
+you don't want this functionality:
+
+**NOTE:** This has no effect on apps running on APIs < 11; swiping will always be disabled in those cases
+
+```java
+SnackbarManager.show(
+    Snackbar.with(SnackbarSampleActivity.this) // context
+        .text("Can't swipe this") // text to be displayed
+        .swipeToDismiss(false) // disable swipe-to-dismiss functionality
+    , this); // activity where it is displayed
 ```
 
-There are two `Snackbar` types: single-line (default) and multi-line (2 lines max). You can also set the duration of the `Snackbar` similar to a [`Toast`](http://developer.android.com/reference/android/widget/Toast.html). Animation disabling is also possible. 
-<pre>Snackbar.with(getApplicationContext()) // context
-    .type(Snackbar.SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-    .text("This is a multi-line snackbar. Keep in mind that snackbars are " +
-        "meant for VERY short messages") // text to be displayed
-    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
-    .animation(false) // don't animate it
-    .show(this); // where it is displayed
-</pre>If you need to know when the `Snackbar` is shown or dismissed, assign a `EventListener` to it. This is useful if you need to move other objects while the `Snackbar` is displayed. For instance, you can move a Floating Action Button up while the `Snackbar` is on screen: 
-<pre>
-Snackbar.with(getApplicationContext()) // context
-    .text("This will do something when dismissed") // text to display
-    .eventListener(new Snackbar.EventListener() {
-        @Override
-        public void onShow(int height) {
-           myFloatingActionButton.moveUp(height);
-        }        
-        @Override
-        public void onDismiss(int height) {
-           myFloatingActionButton.moveDown(height);
-        }
-    }) // Snackbar's DismissListener
-    .show(this); // activity where it is displayed
-</pre>Finally, you can change the `Snackbar`'s colors. 
-<pre>Snackbar.with(getApplicationContext()) // context
-    .text("Different colors this time") // text to be displayed
-    .textColor(Color.GREEN) // change the text color
-    .color(Color.BLUE) // change the background color
-    .actionLabel("Action") // action button label
-    .actionColor(Color.RED) // action button label color
-    .actionListener(new Snackbar.ActionClickListener() {
-        @Override
-        public void onActionClicked() {
-            Log.d(TAG, "Doing something");
-        }
-     }) // action button's ActionClickListener    
-    .show(this); // activity where it is displayed
-</pre>The documentation also states that they can be swiped off the screen. I used [Roman Nurik's SwipeToDismiss sample code](https://github.com/romannurik/android-swipetodismiss) to implement this.
-
-The library project is on [GitHub](https://github.com/nispok/snackbar) along with an example app. If you would like to add features to it or report any bugs, refer to the [issues](https://github.com/wmora/snackbar/issues) section.
+The library project is on [GitHub](https://github.com/nispok/snackbar) along with an example app. If you would like to add features to it or report any bugs, refer to the [issues](https://github.com/nispok/snackbar/issues) section.
 Here are a few screenshots of the library in action:
 
-[![](http://1.bp.blogspot.com/-5OkYxr59g10/U_Ps-4vV3XI/AAAAAAAAGyQ/RPX1BAd9eHU/s320/Screenshot_2014-08-19-19-14-07.png)](http://1.bp.blogspot.com/-5OkYxr59g10/U_Ps-4vV3XI/AAAAAAAAGyQ/RPX1BAd9eHU/s1600/Screenshot_2014-08-19-19-14-07.png)&nbsp;&nbsp;[![](http://3.bp.blogspot.com/-rqMpr9nysSY/U_Ps-zvhgOI/AAAAAAAAGyM/38M0N_j4i6U/s320/Screenshot_2014-08-19-19-14-16.png)](http://3.bp.blogspot.com/-rqMpr9nysSY/U_Ps-zvhgOI/AAAAAAAAGyM/38M0N_j4i6U/s1600/Screenshot_2014-08-19-19-14-16.png)&nbsp;&nbsp;[![](http://2.bp.blogspot.com/-AwjqlrBiAfs/U_Ps-2L_uqI/AAAAAAAAGyI/YJRtC21ocp8/s320/Screenshot_2014-08-19-19-14-24.png)](http://2.bp.blogspot.com/-AwjqlrBiAfs/U_Ps-2L_uqI/AAAAAAAAGyI/YJRtC21ocp8/s1600/Screenshot_2014-08-19-19-14-24.png)
-[![](http://2.bp.blogspot.com/-W5S5LB61fOM/U_PtADkAmWI/AAAAAAAAGys/xFAb3FbYnls/s320/Screenshot_2014-08-19-19-14-31.png)](http://2.bp.blogspot.com/-W5S5LB61fOM/U_PtADkAmWI/AAAAAAAAGys/xFAb3FbYnls/s1600/Screenshot_2014-08-19-19-14-31.png)&nbsp;&nbsp;[![](http://2.bp.blogspot.com/-mpoO1PpIZfU/U_PtAbT9NdI/AAAAAAAAGyU/xvDYuIC1nsM/s320/Screenshot_2014-08-19-19-14-43.png)](http://2.bp.blogspot.com/-mpoO1PpIZfU/U_PtAbT9NdI/AAAAAAAAGyU/xvDYuIC1nsM/s1600/Screenshot_2014-08-19-19-14-43.png)&nbsp;&nbsp;[![](http://1.bp.blogspot.com/-6FuxqQH1d3E/U_PtBKyjcsI/AAAAAAAAGyY/kc-qMazyk9c/s320/Screenshot_2014-08-19-19-15-07.png)](http://1.bp.blogspot.com/-6FuxqQH1d3E/U_PtBKyjcsI/AAAAAAAAGyY/kc-qMazyk9c/s1600/Screenshot_2014-08-19-19-15-07.png)
+<img src="{{ page.assets_url }}/screenshot_1.png" width={{ page.screenshot_width }}>
+<img src="{{ page.assets_url }}/screenshot_2.png" width={{ page.screenshot_width }}>
+<img src="{{ page.assets_url }}/screenshot_3.png" width={{ page.screenshot_width }}>
+<img src="{{ page.assets_url }}/screenshot_4.png" width={{ page.screenshot_width }}>
+<img src="{{ page.assets_url }}/screenshot_5.png" width={{ page.screenshot_width }}>
