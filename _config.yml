@@ -8,7 +8,7 @@ twitter_username: _williammora
 github_username: wmora
 disqus_username: williammora
 isso_domain: 
-ga_tracking_id: #UA-39417110-1
+ga_tracking_id: UA-39417110-1
 
 # Build settings
 markdown: redcarpet
