@@ -4,14 +4,13 @@ layout: blank
       <article>
         <header>
           <h1><a href="{{ page.url | prepend: site.baseur }}">{{ page.title }}</a></h1>
+          {% include share-page.html %}
           <p>{% if page.author %} • {% endif %}{% if page.date %}<time>{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | join: ', ' }}{% endif %}</p>
         </header>
         <div>
           {{ content }}
         </div>
-        {% if page.share == true %}
-          {% include share-page.html %}
-        {% endif %}
+        {% include share-page.html %}
         {% if site.isso_domain and page.id %}
         <section id="isso-thread"></section>
         {% endif %}

@@ -22,20 +22,17 @@ body > *:nth-child(odd) div a {
 
 .share-page {
     text-align: center;
-    background: #222;
-    color: white;
+    color: #222;
     padding: 8px 15px;
-    border-radius: 2px;
     margin: 15px 0;
+    vertical-align: middle;
 }
 
 .share-page a {
-    font-weight: 700;
-    color: white;
-    margin-left: 10px;
+    color: #222;
     text-decoration: none;
+}
 
-    &:hover {
-        border-bottom: 1px dashed white;
-    }
+.icon {
+    padding: 5px;
 }

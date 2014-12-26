@@ -7,6 +7,7 @@
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <title>{% if page.title %} {{ page.title }} › {% endif %}{{ site.title }}</title>
     <link rel="canonical" href="{{ page.url | prepend: site.url }}">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ "/basic.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" type="text/css" href="{{ "/contrast.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" type="text/css" href="{{ "/highlight.css" | prepend: site.baseurl }}">
@@ -29,6 +30,7 @@
   <body>
     <header>
       <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
+      {% include icons.html %}
       <nav>
         <ul>
           <li><a href="{{ site.url }}">Home</a></li>{% for node in site.pages %}{% if node.title %}<li><a href="{{ node.url | prepend: site.baseurl }}"{% if page.url == node.url %} id="selected"{% endif %}>{{ node.title }}</a></li>{% endif %}{% endfor %}
