@@ -16,6 +16,7 @@ assets_url: /assets/libgdx-cityescape-tutorial
 Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-1.html) for the project and world setup!
 
 This is part 2 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+<!--more-->
 
 ## Run, Jump and Dodge!
 The next step is to create our main guy, the runner. He will be a dynamic body with a fixed position on the x-axis with the ability to jump when the right side of the screen is touched and will dodge for as long the left side of the screen is touched.

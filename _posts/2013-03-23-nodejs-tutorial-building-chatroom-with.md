@@ -31,6 +31,7 @@ Create the folder where we'll have our project, we'll be working from here from 
 
 In Node, we don't really create a project with a specific folder structure, but create an app file instead; that is, the file that will be executed as the node application. You may name the file as you want; in most of the projects I've seen it named either app.js or server.js. Since we'll be building a web server, let's go with `server.js`. 
 
+<!--more-->
 Let's make sure our node installation works properly. Put the following in `server.js`: 
 
 ```bash

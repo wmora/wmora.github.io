@@ -22,8 +22,9 @@ CREATE TABLE tab1
 col2  VARCHAR(30) NOT NULL);
 ```
 
-That statement will create 2 NOT NULL constraints with a system generated name (ex: `SYS_C00641322` and `SYS_C00641323`). If the schema that owns that table is exported and then imported to another schema, it will create two additional `NOT NULL` constraints since it recreates the table running the exact same command shown above.  That could be prevented by having user generated constraint names:  
+That statement will create 2 `NOT NULL` constraints with a system generated name (ex: `SYS_C00641322` and `SYS_C00641323`). If the schema that owns that table is exported and then imported to another schema, it will create two additional `NOT NULL` constraints since it recreates the table running the exact same command shown above. That could be prevented by having user generated constraint names:  
 
+<!--more-->
 ```sql
 CREATE TABLE tab1
 (col1  VARCHAR(2) CONSTRAINT COL1_NN NOT NULL,

@@ -8,6 +8,7 @@ permalink: /2011/01/spinnersimpledatemodel.html
 
 Here is the code for a `JSpinnerModel` that handles `Date` objects in simple format (e.g. 'dd/MM/yyyy'). It extends a `SpinnerDateModel` so most of the code is based on that class. This class assumes that values are separated by a slash (/). The reason why I created this was based on a client's requirement where I could only display the date in simple format and select the calendar using a `JSpinner`: 
 
+<!--more-->
 ```java
 /**
  * A SpinnerSimpleDateModel for sequences of formatted Dates.

@@ -28,7 +28,7 @@ Setting up swapspace version 1, size = 1999996 KiB
 no label, UUID=aa8617a8-9500-498e-90da-f5164190ad00
 $ sudo swapon /tmp/swapfile
 ```
-
+<!--more-->
 Checked my swap memory with `free -m`:
 
 ```bash

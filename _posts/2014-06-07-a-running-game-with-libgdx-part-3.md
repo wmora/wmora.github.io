@@ -18,6 +18,7 @@ Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx
 Check out [part 2](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-2.html) for implementing controls for our runner!
 
 This is part 3 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+<!--more-->
 
 ## Watch Out for the Enemies!
 In this section we'll introduce our enemies, a bunch of running/flying insects. They will all be coming towards our runner in an attempt to hit/stop him. We will have 6 types of enemies: 4 of them will be running so we'll have to jump over them and the other 2 will be flying, so we'll have to dodge them. This is the configuration (width x height in meters) I came up with for all enemies:

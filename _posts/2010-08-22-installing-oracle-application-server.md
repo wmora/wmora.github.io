@@ -35,6 +35,7 @@ at com.evermind.client.orion.Oc4jAdminConsole.executeCommand(Oc4jAdminConsole.ja
 ... 8 more
 ...
 ```
+<!--more-->
 
 The reason for this is because one of Microsoft's security updates (MS09-012 or KB956572). When the patch is installed, it prevents any JAVA Virtual Machine to run properly.
 If you encounter this issue during the OAS installation (or with any other application running a JVM), do a clean deinstall of the application server. Next, download Microsoft's patch to solve this issue (click [here](http://www.microsoft.com/downloads/details.aspx?FamilyID=972ba7c5-54df-4b0f-819b-4405bbbed291&displaylang=en) to download and remember to download it in the correct language). Restart your server after the patch is installed, run the Oracle Universal Installer again to install the Oracle Application Server and the installation should be successful now.

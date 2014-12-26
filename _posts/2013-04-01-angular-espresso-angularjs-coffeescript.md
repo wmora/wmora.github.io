@@ -21,6 +21,7 @@ _**UPDATE:** This post is now outdated. Check out the project's [git page](http:
 [AngularJS](http://angularjs.org/) is a powerful framework maintained by Google. I started playing around with it a few weeks ago and I think it is great for developing web apps. If you are a used to using [jQuery](http://jquery.com/) for DOM manipulation and/or your views' logic, you'll have to change your approach and change the way you write dynamic views. Best of all, AngularJS is more than that: you could also have models, controllers, services and use partial views to develop a true, behavior-driven web app.
 
 The AngularJS team has an [angular-seed](https://github.com/angular/angular-seed) project that is very useful as a starting point for an AnglarJS app. There's also an [extension](https://github.com/btford/angular-express-seed) of that project that integrates [Express](http://expressjs.com/) with AngularJS.
+<!--more-->
 
 Both of those projects are great. Based on them, I created a starting point for an AngularJS project, powered by [Node.js](http://nodejs.org/) and Express at the backend, all written in [CoffeeScript](http://coffeescript.org/). The result is [Angular Espresso](http://wmora.github.com/angular-espresso/).
 
