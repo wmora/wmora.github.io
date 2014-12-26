@@ -1,13 +1,14 @@
 # Site settings
 title: William Mora
 email: william.r.mora@gmail.com
-description: "Really cool blog about ... something"
+description: "Software development (mostly). Random tech, tips, thoughts, etc."
 baseurl: ""
 url: "http://www.williammora.com"
 twitter_username: _williammora
 github_username: wmora
 disqus_username: williammora
 isso_domain: 
+ga_tracking_id: #UA-39417110-1
 
 # Build settings
 markdown: redcarpet
@@ -22,3 +23,4 @@ defaults:
       path: ""
     values:
       layout: "default"
+      share: true

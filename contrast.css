@@ -1,20 +1,41 @@
-
-body {
-    padding: 0 calc(27% - 6em);
-    background: whitesmoke;
+body > * {
+    padding-right: calc(33% - 6em);
+    padding-left: calc(33% - 6em);
 }
 
-body > header, article, body > footer {
-    padding-left: calc(12% - 1.6em);
-    padding-right: calc(12% - 1.6em);
-}
-
-body > header, body > footer {
-    background: black;
+body > *:nth-child(odd) {
+    background: #222;
     color: white;
 }
 
-article {
-    background: white;
-    border-top: 1px solid gainsboro;
+body > *:nth-child(odd) header p {
+    color: darkgray;
+}
+
+body > *:nth-child(odd) blockquote {
+    border-left: 5px solid #fc5;
+}
+
+body > *:nth-child(odd) div a {
+    color: #fc5;
+}
+
+.share-page {
+    text-align: center;
+    background: #222;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 2px;
+    margin: 15px 0;
+}
+
+.share-page a {
+    font-weight: 700;
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+
+    &:hover {
+        border-bottom: 1px dashed white;
+    }
 }

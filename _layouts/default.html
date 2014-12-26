@@ -7,8 +7,11 @@ layout: blank
           <p>{% if page.author %}{{ page.author }} • {% endif %}{% if page.date %}<time>{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | join: ', ' }}{% endif %}</p>
         </header>
         <div>
-{{ content }}
+          {{ content }}
         </div>
+        {% if page.share == true %}
+          {% include share-page.html %}
+        {% endif %}
         {% if site.isso_domain and page.id %}
         <section id="isso-thread"></section>
         {% endif %}
