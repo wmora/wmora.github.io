@@ -443,7 +443,7 @@ public class BodyUtils {
     public static boolean bodyIsEnemy(Body body) {
         UserData userData = (UserData) body.getUserData();
 
-        return userData != null &amp;&amp; userData.getUserDataType() == UserDataType.ENEMY;
+        return userData != null && userData.getUserDataType() == UserDataType.ENEMY;
     }
 
     ...
@@ -488,7 +488,7 @@ public class GameStage extends Stage implements ContactListener {
         // Fixed timestep
         accumulator += delta;
 
-        while (accumulator &gt;= delta) {
+        while (accumulator >= delta) {
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }
@@ -499,7 +499,7 @@ public class GameStage extends Stage implements ContactListener {
 
     private void update(Body body) {
         if (!BodyUtils.bodyInBounds(body)) {
-            if (BodyUtils.bodyIsEnemy(body) &amp;&amp; !runner.isHit()) {
+            if (BodyUtils.bodyIsEnemy(body) && !runner.isHit()) {
                 createEnemy();
             }
             world.destroyBody(body);
@@ -522,7 +522,7 @@ public class GameStage extends Stage implements ContactListener {
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
             runner.hit();
-        } else if ((BodyUtils.bodyIsRunner(a) &amp;&amp; BodyUtils.bodyIsGround(b)) ||
+        } else if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsGround(b)) ||
                 (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsRunner(b))) {
             runner.landed();
         }

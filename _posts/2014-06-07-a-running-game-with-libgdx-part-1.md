@@ -69,9 +69,9 @@ BUILD SUCCESSFUL
 
 Total time: 30.126 secs
 Done!
-To import in Eclipse: File -&gt; Import -&gt; Gradle -&gt; Gradle Project
-To import to Intellij IDEA: File -&gt; Import -&gt; build.gradle
-To import to NetBeans: File -&gt; Open Project...
+To import in Eclipse: File -> Import -> Gradle -> Gradle Project
+To import to Intellij IDEA: File -> Import -> build.gradle
+To import to NetBeans: File -> Open Project...
 ```
 
 I won't go over importing the project into an IDE since it's part of a libGDX project setup and it is up to you which IDE to use (in case you are wondering, I'm using IntelliJ IDEA 13 at the time of this writing).
@@ -339,7 +339,7 @@ public class GameStage extends Stage {
         // Fixed timestep
         accumulator += delta;
 
-        while (accumulator &gt;= delta) {
+        while (accumulator >= delta) {
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }

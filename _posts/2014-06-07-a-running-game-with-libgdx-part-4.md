@@ -93,7 +93,7 @@ public class Background extends Actor {
     }
 
     private boolean leftBoundsReached(float delta) {
-        return (textureRegionBounds2.x - (delta * speed)) &lt;= 0;
+        return (textureRegionBounds2.x - (delta * speed)) <= 0;
     }
 
     private void updateXBounds(float delta) {
@@ -353,7 +353,7 @@ public class Ground extends GameActor {
     }
 
     private boolean leftBoundsReached(float delta) {
-        return (textureRegionBounds2.x - transformToScreen(delta * speed)) &lt;= 0;
+        return (textureRegionBounds2.x - transformToScreen(delta * speed)) <= 0;
     }
 
     private void updateXBounds(float delta) {

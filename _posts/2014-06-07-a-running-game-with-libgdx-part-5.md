@@ -209,7 +209,7 @@ public class Runner extends GameActor {
         super(body);
         TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
         TextureRegion[] runningFrames = new TextureRegion[Constants.RUNNER_RUNNING_REGION_NAMES.length];
-        for (int i = 0; i &lt; Constants.RUNNER_RUNNING_REGION_NAMES.length; i++) {
+        for (int i = 0; i < Constants.RUNNER_RUNNING_REGION_NAMES.length; i++) {
             String path = Constants.RUNNER_RUNNING_REGION_NAMES[i];
             runningFrames[i] = textureAtlas.findRegion(path);
         }
@@ -402,7 +402,7 @@ public class Enemy extends GameActor {
         super(body);
         TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
         TextureRegion[] runningFrames = new TextureRegion[getUserData().getTextureRegions().length];
-        for (int i = 0; i &lt; getUserData().getTextureRegions().length; i++) {
+        for (int i = 0; i < getUserData().getTextureRegions().length; i++) {
             String path = getUserData().getTextureRegions()[i];
             runningFrames[i] = textureAtlas.findRegion(path);
         }
