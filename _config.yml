@@ -23,4 +23,4 @@ defaults:
       path: ""
     values:
       layout: "default"
-      share: true
+      share: true # Sharing enabled
