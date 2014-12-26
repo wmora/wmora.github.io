@@ -90,3 +90,8 @@ body > header, body > footer {
 body > footer span {
     margin: 0 5%;
 }
+
+pre {
+    color: white;
+    background-color: #333;
+}
