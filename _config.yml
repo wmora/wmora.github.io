@@ -13,7 +13,7 @@ ga_tracking_id: UA-39417110-1
 # Build settings
 markdown: redcarpet
 source: .
-permalink: /:title.html
+permalink: /:title
 
 excerpt_separator: "<!--more-->"
 
