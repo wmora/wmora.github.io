@@ -1,5 +1,5 @@
 ---
-title: SidingTabs Android Library
+title: SlidingTabs Android Library
 date: 2014-12-27
 author: William Mora
 tags:
