@@ -7,7 +7,8 @@ tags:
 - video games
 - 1gam
 - martian run!
-permalink: /2014/06/im-joining-one-game-month.html
+redirect_from: 
+- /2014/06/im-joining-one-game-month.html
 ---
 
 After finishing my last game, [Martian Run!](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android), I am feeling inspired to keep working on small games. For that, I decided to join [One Game a Month](http://onegameamonth.com/). I really hope to get some XP! :D

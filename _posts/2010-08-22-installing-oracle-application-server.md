@@ -9,7 +9,8 @@ tags:
 - Windows Server 2003 SP2
 - JVM
 - Java Virtual Machine
-permalink: /2010/08/installing-oracle-application-server.html
+redirect_from: 
+- /2010/08/installing-oracle-application-server.html
 ---
 
 If you try to install the Oracle Application Server 10g (9.0.4) on a Windows Server 2003 SP2, you may encounter an error when the installer tries to configure the OC4J instances with the following:

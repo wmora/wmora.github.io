@@ -11,7 +11,8 @@ tags:
 - constraints
 - Oracle
 - SQL
-permalink: /2010/07/duplicate-oracle-constraints.html
+redirect_from: 
+- /2010/07/duplicate-oracle-constraints.html
 ---
 
 If you have ever used the Oracle import utility, your database has system generated constraint names (ex: `SYS_C00641321`), and you did not specify `CONSTRAINTS=N` during the import then chances are you have duplicate constraints for pretty much every constraint except for any `PRIMARY KEY`, `FOREIGN KEY` and user generated constraint names.  I recently stumbled upon a database that had performance issues and one of the things I noticed was that almost every single constraint was repeated up to 10 times. Most of the duplicates were `NOT NULL` constraints, which is kind of expected since people tend to create `NOT NULL` constraints anonymously such as the following:  

@@ -12,7 +12,8 @@ tags:
 - github
 - Android
 - material design
-permalink: /2014/08/snackbar-android-library.html
+redirect_from: 
+- /2014/08/snackbar-android-library.html
 assets_url: /assets/snackbar-android-library
 screenshot_width: 180
 ---

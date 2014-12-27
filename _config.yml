@@ -24,3 +24,6 @@ defaults:
     values:
       layout: "default"
       share: true # Sharing enabled
+
+gems:
+  - jekyll-redirect-from

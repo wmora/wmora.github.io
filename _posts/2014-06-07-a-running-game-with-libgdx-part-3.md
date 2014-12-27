@@ -11,11 +11,12 @@ tags:
 - video games
 - enums
 - Android
-permalink: /2014/06/a-running-game-with-libgdx-part-3.html
+redirect_from: 
+- /2014/06/a-running-game-with-libgdx-part-3.html
 ---
 
-Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-1.html) for the project and world setup!
-Check out [part 2](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-2.html) for implementing controls for our runner!
+Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
+Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls for our runner!
 
 This is part 3 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
@@ -540,5 +541,5 @@ And we've got ourselves a game! Run the game and you'll get "enemies" of differe
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-e6f04ccb1a244a30" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
 At this point, I think enough has been covered to understand the basics of implementing a running game. In the next parts of this guide I will add some more stuff to make the game a little more fun, but I recommend you take it from here and customize it as you wish. 
-[Click here](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-4.html) for part 4. 
+[Click here](/a-running-game-with-libgdx-part-4) for part 4. 
 Feel free to drop any questions or comments in the comments section. Cheers!

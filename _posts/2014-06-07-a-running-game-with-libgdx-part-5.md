@@ -10,20 +10,21 @@ tags:
 - texture atlas
 - Android
 - TexturePacker
-permalink: /2014/06/a-running-game-with-libgdx-part-5.html
+redirect_from: 
+- /2014/06/a-running-game-with-libgdx-part-5.html
 assets_url: /assets/libgdx-cityescape-tutorial
 ---
 
-Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-1.html) for the project and world setup!
-Check out [part 2](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-2.html) for implementing controls for our runner!
-We introduced our enemies on [part 3](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-3.html).
-We rendered our background and ground on [part 4](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-4.html).
+Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
+Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls for our runner!
+We introduced our enemies on [part 3](/a-running-game-with-libgdx-part-3).
+We rendered our background and ground on [part 4](/a-running-game-with-libgdx-part-4).
 
 Remember the code is on [GitHub](https://github.com/wmora/cityescape). Graphics were made by [Kenney](http://www.kenney.nl/). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
 ## Where Are My Characters?
-If are coming from the [previous part](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-4.html), you probably know that we stopped showing our runner and the enemies but hey, at least the background and the ground are looking good! In this next part we are going to display our characters again.
+If are coming from the [previous part](/a-running-game-with-libgdx-part-4), you probably know that we stopped showing our runner and the enemies but hey, at least the background and the ground are looking good! In this next part we are going to display our characters again.
 
 Let's start with the runner (I know he's not the same as the one on my final version, sorry!). So, we have four states for our guy: he's either running, jumping, dodging or too busy getting hit by the enemies. We are going to store all his textures, along with the enemies', in a texture atlas. Here is the image (`characters.png`):
 

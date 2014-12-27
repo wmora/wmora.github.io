@@ -6,7 +6,8 @@ tags:
 - not exists
 - exists
 - SQL
-permalink: /2010/05/sql-exists-condition.html
+redirect_from: 
+- /2010/05/sql-exists-condition.html
 ---
 
 The SQL `EXISTS` condition is a boolean function that returns true if the condition is met. The syntax is pretty simple:

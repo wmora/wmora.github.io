@@ -13,7 +13,8 @@ tags:
 - mongoose
 - express
 - mocha
-permalink: /2013/04/angular-espresso-angularjs-coffeescript.html
+redirect_from: 
+- /2013/04/angular-espresso-angularjs-coffeescript.html
 ---
 
 _**UPDATE:** This post is now outdated. Check out the project's [git page](http://wmora.github.io/angular-espresso/) for the latest info on Angular Espresso._

@@ -10,7 +10,8 @@ tags:
 - swap size
 - swapon
 - Oracle
-permalink: /2010/05/how-to-modify-swap-size-ubuntu-1004.html
+redirect_from: 
+- /2010/05/how-to-modify-swap-size-ubuntu-1004.html
 ---
 
 When installing Ubuntu, I was never asked about the desired size for my swap size. Oracle recommends to use at least 2GB of memory in order to create a database, let alone run it.

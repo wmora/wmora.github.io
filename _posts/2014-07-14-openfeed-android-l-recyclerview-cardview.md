@@ -14,7 +14,8 @@ tags:
 - OpenFeed
 - nexus 5
 - Material theme
-permalink: /2014/07/openfeed-android-l-recyclerview-cardview.html
+redirect_from: 
+- /2014/07/openfeed-android-l-recyclerview-cardview.html
 ---
 
 With Google's announcement of the new version of [Android (codename L)](http://www.androidauthority.com/android-l-release-official-397212/) last month. I installed the [preview SDK](https://developer.android.com/preview/setup-sdk.html) on my Nexus 5 and all of my apps worked pretty good except for Twitter which would not even open.

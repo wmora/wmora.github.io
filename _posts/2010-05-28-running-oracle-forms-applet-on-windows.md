@@ -13,7 +13,8 @@ tags:
 - graphics card
 - Oracle
 - jdk
-permalink: /2010/05/running-oracle-forms-applet-on-windows.html
+redirect_from: 
+- /2010/05/running-oracle-forms-applet-on-windows.html
 ---
 
 I was trying to run my application built in Oracle Forms and Reports on a new  laptop with Windows 7. However, when running the Java forms applet, the applet’s  graphics stayed frozen and I was not able to see my application properly. 

@@ -13,7 +13,8 @@ tags:
 - web services
 - json
 - express
-permalink: /2013/03/nodejs-tutorial-building-chatroom-with.html
+redirect_from: 
+- /2013/03/nodejs-tutorial-building-chatroom-with.html
 assets_url: /assets/nodejs-chatroom-tutorial
 ---
 

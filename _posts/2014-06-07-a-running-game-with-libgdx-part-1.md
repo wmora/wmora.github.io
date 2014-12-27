@@ -9,7 +9,8 @@ tags:
 - libGDX
 - video games
 - Android
-permalink: /2014/06/a-running-game-with-libgdx-part-1.html
+redirect_from: 
+- /2014/06/a-running-game-with-libgdx-part-1.html
 assets_url: /assets/libgdx-cityescape-tutorial
 ---
 
@@ -398,6 +399,6 @@ Run the game and you'll see a green line at the bottom which is the outline of t
 
 <img src="{{ page.assets_url }}/world_with_ground.png" width=480 />
 
-In the [next part](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-2.html), we'll add our runner with some basic controls.
+In the [next part](/a-running-game-with-libgdx-part-2), we'll add our runner with some basic controls.
 
 If you have any questions or comments, feel free to let me know in the comments section. Cheers!

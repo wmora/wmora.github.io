@@ -9,13 +9,14 @@ tags:
 - libGDX
 - video games
 - Android
-permalink: /2014/06/a-running-game-with-libgdx-part-4.html
+redirect_from: 
+- /2014/06/a-running-game-with-libgdx-part-4.html
 assets_url: /assets/libgdx-cityescape-tutorial
 ---
 
-Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-1.html) for the project and world setup!
-Check out [part 2](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-2.html) for implementing controls for our runner!
-We introduced our enemies on [part 3](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-3.html).
+Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
+Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls for our runner!
+We introduced our enemies on [part 3](/a-running-game-with-libgdx-part-3).
 
 This is part 4 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
@@ -379,4 +380,4 @@ The game looks really good so far, even though we lost our characters :D. Let's 
 
 If you have any questions or comments please let me know in the comments section. Please keep in mind that this was my way of solving the box2d to scene2d graphics conversion and I know that there are probably better ways to implement these kind of animations.
 
-[Click here](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-5.html) for part 5. Cheers!
+[Click here](/a-running-game-with-libgdx-part-5) for part 5. Cheers!

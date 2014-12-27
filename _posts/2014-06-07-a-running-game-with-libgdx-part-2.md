@@ -9,11 +9,12 @@ tags:
 - libGDX
 - video games
 - Android
-permalink: /2014/06/a-running-game-with-libgdx-part-2.html
+redirect_from: 
+- /2014/06/a-running-game-with-libgdx-part-2.html
 assets_url: /assets/libgdx-cityescape-tutorial
 ---
 
-Check out [part 1](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-1.html) for the project and world setup!
+Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
 
 This is part 2 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
@@ -758,6 +759,6 @@ The video shows how the game is working at this point:
 
 Very nice, isn't it? So, what about the running part? We will keep our runner fixed at this position and make the objects move towards him, the animations will give the illusion of the runner moving forward. This means we are done with our runner's controls!
 
-In the [next part](http://www.williammora.com/2014/06/a-running-game-with-libgdx-part-3.html), we will be adding our enemies to the game. 
+In the [next part](/a-running-game-with-libgdx-part-3), we will be adding our enemies to the game. 
 
 If you have any questions or comments on what we have done so far, feel free to let me know in the comments section. Cheers!

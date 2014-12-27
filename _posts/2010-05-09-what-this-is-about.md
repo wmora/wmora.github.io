@@ -3,7 +3,8 @@ title: What This is About
 date: "2010-05-09T12:42:00.000-03:00"
 author: William Mora
 tags: 
-permalink: /2010/05/what-this-is-about.html
+redirect_from: 
+- /2010/05/what-this-is-about.html
 ---
 
 Hello!
