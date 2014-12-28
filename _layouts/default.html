@@ -9,17 +9,9 @@ layout: blank
         </header>
         <div>
           {{ content }}
+          {% include share-page.html %}
+          {% include bottom-ad.html %}
         </div>
-        {% include share-page.html %}
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Post Bottom -->
-        <ins class="adsbygoogle post-bottom-ad"
-             style="display:inline-block"
-             data-ad-client="ca-pub-9726805752162406"
-             data-ad-slot="5312702148"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         {% if site.isso_domain and page.id %}
         <section id="isso-thread"></section>
         {% endif %}

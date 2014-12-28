@@ -108,20 +108,3 @@ body > footer span {
 .centered {
     text-align: center;
 }
-
-.post-bottom-ad { 
-    width: 320px; 
-    height: 50px; 
-}
-@media(min-width: 500px) {
-    .post-bottom-ad { 
-        width: 468px; 
-        height: 60px; 
-    } 
-}
-@media(min-width: 800px) { 
-    .post-bottom-ad { 
-        width: 728px; 
-        height: 90px; 
-    } 
-}

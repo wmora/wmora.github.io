@@ -24,6 +24,7 @@ defaults:
     values:
       layout: "default"
       share: true # Sharing enabled
+      display_ad: true
 
 gems:
   - jekyll-redirect-from
