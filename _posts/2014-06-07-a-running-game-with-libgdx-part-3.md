@@ -18,7 +18,7 @@ redirect_from:
 Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
 Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls for our runner!
 
-This is part 3 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+This is part 3 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/martianrun). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
 ## Watch Out for the Enemies!
@@ -36,9 +36,9 @@ The logic for our enemies will be the following: we'll place an enemy just outsi
 Since we want to generate different types of enemies, we'll store their configuration as an `enum`. In our `enums` package, create an enum called `EnemyType` with the following:
 
 ```java
-package com.gamestudio24.cityescape.enums;
+package com.gamestudio24.martianrun.enums;
 
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public enum EnemyType {
 
@@ -89,7 +89,7 @@ public enum EnemyType {
 The new `Constants` added: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -110,9 +110,9 @@ public class Constants {
 To obtain a random value from an `enum`, I created a `RandomUtils` class inside our `utils` package that contains a `private static RandomEnum` class that returns a random value from a given `enum` (credits go to [this SO question](http://stackoverflow.com/a/1973018)): 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
-import com.gamestudio24.cityescape.enums.EnemyType;
+import com.gamestudio24.martianrun.enums.EnemyType;
 
 import java.util.Random;
 
@@ -148,7 +148,7 @@ public class RandomUtils {
 Since we want to be consistent with our project setup, we have to create an `EnemyUserData` which extends from our `UserData` as well as an `Enemy` which extends from our `GameActor`. Let's add an `ENEMY` value to our `UserDataType` enum: 
 
 ```java
-package com.gamestudio24.cityescape.enums;
+package com.gamestudio24.martianrun.enums;
 
 public enum UserDataType {
 
@@ -164,9 +164,9 @@ Hey! What was that `ENEMY_LINEAR_VELOCITY` we added to our `Constants`? Well, re
 Before creating or `EnemyUserData` class, I'd like to change something in our `UserData` class: when we check if a character is in bounds (we'll add that in a little bit), I need the character's `width` in order to calculate  it. I want to store this info whenever we create a new `UserData` object: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
-import com.gamestudio24.cityescape.enums.UserDataType;
+import com.gamestudio24.martianrun.enums.UserDataType;
 
 public abstract class UserData {
 
@@ -207,7 +207,7 @@ public abstract class UserData {
 Let's match this new constructor in our `RunnerUserData`: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import ...
 
@@ -229,11 +229,11 @@ public class RunnerUserData extends UserData {
 And now we can create our `EnemyUserData`: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gamestudio24.cityescape.enums.UserDataType;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.enums.UserDataType;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class EnemyUserData extends UserData {
 
@@ -259,10 +259,10 @@ public class EnemyUserData extends UserData {
 Let's now add our `Enemy` class that extends from our `GameActor`. Like it's mentioned before, the logic for an enemy is to constantly move in the -x direction: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.EnemyUserData;
+import com.gamestudio24.martianrun.box2d.EnemyUserData;
 
 public class Enemy extends GameActor {
 
@@ -287,13 +287,13 @@ public class Enemy extends GameActor {
 We'll add a `createEnemy` function using our `WorldUtils` to create an `Enemy` of a random `EnemyType`. Note that in our `World`, an enemy will be a `KinematicBody`, which means it will move but it won't be affected if it's hit by another object (the `Runner`). While we are at it, we also have to change a line in our `createRunner` function so we store the `Runner width` and `height`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
-import com.gamestudio24.cityescape.box2d.EnemyUserData;
-import com.gamestudio24.cityescape.box2d.GroundUserData;
-import com.gamestudio24.cityescape.box2d.RunnerUserData;
-import com.gamestudio24.cityescape.enums.EnemyType;
+import com.gamestudio24.martianrun.box2d.EnemyUserData;
+import com.gamestudio24.martianrun.box2d.GroundUserData;
+import com.gamestudio24.martianrun.box2d.RunnerUserData;
+import com.gamestudio24.martianrun.enums.EnemyType;
 
 public class WorldUtils {
 
@@ -330,7 +330,7 @@ Now, we will add the following logic to our `GameStage`: when the game is runnin
 Let's store the _angular impulse_ we just mentioned in our `Constants`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -348,7 +348,7 @@ public class Constants {
 And access it through our `RunnerUserData` object: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import ...
 
@@ -366,10 +366,10 @@ public class RunnerUserData extends UserData {
 Our `Runner` now needs to apply this _angular impulse_ whenever he's `hit()`: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.RunnerUserData;
+import com.gamestudio24.martianrun.box2d.RunnerUserData;
 
 public class Runner extends GameActor {
 
@@ -424,7 +424,7 @@ public class Runner extends GameActor {
 Now, add a couple of helper functions in our `BodyUtils` class: `bodyIsEnemy` checks whether the given `Body` belongs to an `Enemy` and `bodyInBounds` checks whether the `Runner` or an `Enemy` is in our screen boundaries: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
 
@@ -456,15 +456,15 @@ public class BodyUtils {
 Hook it all up in the `GameStage`: 
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 import com.badlogic.gdx.utils.Array;
-import com.gamestudio24.cityescape.actors.Enemy;
-import com.gamestudio24.cityescape.actors.Ground;
-import com.gamestudio24.cityescape.actors.Runner;
-import com.gamestudio24.cityescape.utils.BodyUtils;
-import com.gamestudio24.cityescape.utils.WorldUtils;
+import com.gamestudio24.martianrun.actors.Enemy;
+import com.gamestudio24.martianrun.actors.Ground;
+import com.gamestudio24.martianrun.actors.Runner;
+import com.gamestudio24.martianrun.utils.BodyUtils;
+import com.gamestudio24.martianrun.utils.WorldUtils;
 
 public class GameStage extends Stage implements ContactListener {
 
@@ -536,7 +536,7 @@ public class GameStage extends Stage implements ContactListener {
 }
 ```
 
-And we've got ourselves a game! Run the game and you'll get "enemies" of different types moving towards the runner. You have to jump or dodge to avoid getting hit by any of them. The following video shows the game at this point: 
+And we've got ourselves a game! Run the game and you'll get "enemies" of different types moving towards the runner. You have to jump or dodge to avoid getting hit by any of them. The following video shows the game at this point (ignore the title, the original game name was modified before the first release): 
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-e6f04ccb1a244a30" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 

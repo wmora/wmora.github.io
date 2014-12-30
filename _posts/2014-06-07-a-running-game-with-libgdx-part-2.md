@@ -11,12 +11,12 @@ tags:
 - Android
 redirect_from: 
 - /2014/06/a-running-game-with-libgdx-part-2.html
-assets_url: /assets/libgdx-cityescape-tutorial
+assets_url: /assets/libgdx-martianrun-tutorial
 ---
 
 Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
 
-This is part 2 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+This is part 2 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/martianrun). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
 ## Run, Jump and Dodge!
@@ -25,7 +25,7 @@ The next step is to create our main guy, the runner. He will be a dynamic body w
 First, let's build our function inside `WorldUtils` that creates the runner:
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
 
@@ -53,7 +53,7 @@ public class WorldUtils {
 And add the following constants:
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -73,7 +73,7 @@ public class Constants {
 How is our runner set up? We created him as a box that is 1 meter wide and 2 meters long. His position will be fixed at 2 meters from the left side of the screen and on top of the ground (duh). Let's make sure that our runner is set up fine by adding him to the `GameStage`:
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 
@@ -101,14 +101,14 @@ public class GameStage extends Stage {
 }
 ```
 
-Run the game again and you should now see the runner (a box) standing there doing nothing, like the image below:
+Run the game again and you should now see the runner (a box) standing there doing nothing, like the image below (ignore the title, the original game name was modified before the first release):
 
 <img src="{{ page.assets_url }}/box.png" width=480 />
 
 Good! Now, before we add the controls to our game, we should make good use of our `GameStage` and use `Actor` classes for our world components (the ground and the runner). In a newly created `actors` package, let's create a base class for our actors called `GameActor`. Let's start with this:
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -127,7 +127,7 @@ public abstract class GameActor extends Actor {
 With the base class done, I'll add a `Ground` class for our ground:
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -143,7 +143,7 @@ public class Ground extends GameActor {
 And a `Runner` class for our runner:
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -159,7 +159,7 @@ public class Runner extends GameActor {
 Notice how our constructor is expecting a `Body`. This will make sure each `Actor` is responsible for the physics `Body` it is supposed to render and update. Let's change our `GameStage` so it uses our newly created classes.
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 
@@ -211,7 +211,7 @@ So, how do I make a body jump? We apply a _linear impulse_ to the body in the y-
 In an `enums` package, create an enum called `UserDataType`: 
 
 ```java
-package com.gamestudio24.cityescape.enums;
+package com.gamestudio24.martianrun.enums;
 
 public enum UserDataType {
 
@@ -224,9 +224,9 @@ public enum UserDataType {
 In a newly created `box2d` package, create an abstract `UserData` class which will be used by our characters:
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
-import com.gamestudio24.cityescape.enums.UserDataType;
+import com.gamestudio24.martianrun.enums.UserDataType;
 
 public abstract class UserData {
 
@@ -246,9 +246,9 @@ public abstract class UserData {
 And extend it for our `Ground` and our `Runner`:
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
-import com.gamestudio24.cityescape.enums.UserDataType;
+import com.gamestudio24.martianrun.enums.UserDataType;
 
 public class GroundUserData extends UserData {
 
@@ -263,11 +263,11 @@ public class GroundUserData extends UserData {
 Our `RunnerUserData` will store the vector to apply to our body when jumping: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gamestudio24.cityescape.enums.UserDataType;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.enums.UserDataType;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class RunnerUserData extends UserData {
 
@@ -293,7 +293,7 @@ public class RunnerUserData extends UserData {
 Here's the new constant I added. Even though it may look like a random value, I actually did a bit of trial and error until the controls felt right. I'm also adding a gravity scale which I'll set in a bit because I want the runner to fall faster so the game has an arcade feel: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -310,11 +310,11 @@ public class Constants {
 Even though I pointed out that `GroundUserData` is pointless, it is important to be consistent with the `UserData` your `Body` objects use to prevent unexpected behavior. We will store an instance of `UserData` in all our `Actor` objects so let's prepare our `GameActor` class for it: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.gamestudio24.cityescape.box2d.UserData;
+import com.gamestudio24.martianrun.box2d.UserData;
 
 public abstract class GameActor extends Actor {
 
@@ -334,7 +334,7 @@ public abstract class GameActor extends Actor {
 I need to override the new `getUserData()` function in our `Ground` class: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -355,10 +355,10 @@ public class Ground extends GameActor {
 Now we have all we need to make our character jump. We'll do it with a `jump()` function in our `Runner` class. We'll also add a `landed()` function to notify the runner he can jump again: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.RunnerUserData;
+import com.gamestudio24.martianrun.box2d.RunnerUserData;
 
 public class Runner extends GameActor {
 
@@ -392,11 +392,11 @@ public class Runner extends GameActor {
 Pretty straightforward, but we need two more things: set the appropriate `UserData` when setting up our `World` and implementing the controls on the `GameStage` to actually make the character jump. Setting the `UserData` is easy, you just need to add a couple of lines in our `WorldUtils` class. I'm also going to add a gravity scale (already added in the `Constants` class) to the runner so he falls faster: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
-import com.gamestudio24.cityescape.box2d.GroundUserData;
-import com.gamestudio24.cityescape.box2d.RunnerUserData;
+import com.gamestudio24.martianrun.box2d.GroundUserData;
+import com.gamestudio24.martianrun.box2d.RunnerUserData;
 
 public class WorldUtils {
 
@@ -428,7 +428,7 @@ public class WorldUtils {
 To implement the controls in our `GameStage`, we must override the `touchDown` function, determine if the right side of the screen is touched and, if so, make the runner `jump()`: 
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -506,11 +506,11 @@ public class GameStage extends Stage {
 The controls are almost done, we need one last thing. We want to know when the runner lands on the ground so we are able to jump again. The way we'll do this is by detecting a collision between the `Runner` and the `Ground` and notifying the `Runner` that he's `landed()`. There's a box2d listener for detecting collision between two bodies called `ContactListener` which we'll implement. First, I'll create a `BodyUtils` class inside the `utils` package with a couple of helper functions: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.UserData;
-import com.gamestudio24.cityescape.enums.UserDataType;
+import com.gamestudio24.martianrun.box2d.UserData;
+import com.gamestudio24.martianrun.enums.UserDataType;
 
 public class BodyUtils {
 
@@ -532,15 +532,15 @@ public class BodyUtils {
 And now implement the `ContactListener` in the `GameStage` class: 
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.gamestudio24.cityescape.actors.Ground;
-import com.gamestudio24.cityescape.actors.Runner;
-import com.gamestudio24.cityescape.utils.BodyUtils;
-import com.gamestudio24.cityescape.utils.WorldUtils;
+import com.gamestudio24.martianrun.actors.Ground;
+import com.gamestudio24.martianrun.actors.Runner;
+import com.gamestudio24.martianrun.utils.BodyUtils;
+import com.gamestudio24.martianrun.utils.WorldUtils;
 
 public class GameStage extends Stage implements ContactListener {
 
@@ -585,7 +585,7 @@ public class GameStage extends Stage implements ContactListener {
 }
 ```
 
-We've added a lot of stuff and it's finally ready to run! Run the game and you'll see that when you click/touch the right side of the screen the runner will jump just like is shown in the following video:
+We've added a lot of stuff and it's finally ready to run! Run the game and you'll see that when you click/touch the right side of the screen the runner will jump just like is shown in the following video (ignore the title, the original game name was modified before the first release):
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-3f79aa0b9d826219" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D3f79aa0b9d826219%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D64E534128E3BBC8FACC5F080BE9C47FEE41B0AE6.84557FDDA41E04EAB5C70E75793D99EC4796ED85%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D3f79aa0b9d826219%26offsetms%3D5000%26itag%3Dw160%26sigh%3DXzEweZj3Am4laf3qUkYnuZdBk5k&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D3f79aa0b9d826219%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D64E534128E3BBC8FACC5F080BE9C47FEE41B0AE6.84557FDDA41E04EAB5C70E75793D99EC4796ED85%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D3f79aa0b9d826219%26offsetms%3D5000%26itag%3Dw160%26sigh%3DXzEweZj3Am4laf3qUkYnuZdBk5k&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
@@ -607,7 +607,7 @@ public class Constants {
 And store this info in our `RunnerUserData` class: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import ...
 
@@ -649,7 +649,7 @@ public class RunnerUserData extends UserData {
 In our `Runner` class, we'll add the functions to `dodge()` and `stopDodge()`. We also have to modify our `jump()` function so it does not make the runner jump while dodging: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import ...
 
@@ -695,7 +695,7 @@ public class Runner extends GameActor {
 Great! Now we need to call these functions from our `GameStage` class. When the user touches the left side of the screen we'll call `dodge()` and whenever we stop touching the screen we'll call `stopDodge()` if the runner `isDodging()`. It's easy to know when we stop touching the screen, we just need to override the `touchUp()` function: 
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 
@@ -753,7 +753,7 @@ public class GameStage extends Stage implements ContactListener {
 ```
 
 Our dodging functionality is done! Run the game and go ahead and touch and hold the left side of the screen; you should now be able to dodge. The jump functionality stays the same.  
-The video shows how the game is working at this point:  
+The video shows how the game is working at this point (ignore the title, the original game name was modified before the first release):  
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-2fc7011b469f2d0b" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D2fc7011b469f2d0b%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D11E61D0F30A3B96A77C0E2536384DEF2EE909B71.186C406C8E696047AC1D87B5C221C067B6E0A3A3%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D2fc7011b469f2d0b%26offsetms%3D5000%26itag%3Dw160%26sigh%3D4aDT3eLqZrCXhHlSYgxR8qDWRPU&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D2fc7011b469f2d0b%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D11E61D0F30A3B96A77C0E2536384DEF2EE909B71.186C406C8E696047AC1D87B5C221C067B6E0A3A3%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D2fc7011b469f2d0b%26offsetms%3D5000%26itag%3Dw160%26sigh%3D4aDT3eLqZrCXhHlSYgxR8qDWRPU&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 

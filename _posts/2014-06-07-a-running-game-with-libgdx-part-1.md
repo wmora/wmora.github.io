@@ -11,7 +11,7 @@ tags:
 - Android
 redirect_from: 
 - /2014/06/a-running-game-with-libgdx-part-1.html
-assets_url: /assets/libgdx-cityescape-tutorial
+assets_url: /assets/libgdx-martianrun-tutorial
 ---
 
 I've always liked 2d running games. When I first got an Android phone, I played [iRunner](https://play.google.com/store/apps/details?id=com.droidhen.irunner) for hours, and at the time I seriously wanted to develop a game like that. A lot of time has passed since but I finally had the time to put together a simple, running game using [libGDX](http://libgdx.badlogicgames.com/). A final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
@@ -23,11 +23,11 @@ I developed this game as a learning exercise using libGDX's [scene2d](https://gi
 
 **_NOTE: I won't be explaining much related to libGDX or box2d as they already have excellent documentation. I'm only guiding you through my own implementation of a game using these tools. If you don't understand why I'm using a particular class or what a physics body is I strongly suggest taking a look at libGDX's [wiki](https://github.com/libgdx/libgdx/wiki)&nbsp;before moving forward._**
 
-This tutorial guides you through the basics of how I implemented the game. The code from these posts is on [GitHub](https://github.com/wmora/cityescape).You are free to use it as you wish.
+This tutorial guides you through the basics of how I implemented the game. The code from these posts is on [GitHub](https://github.com/wmora/martianrun). You are free to use it as you wish.
 
 Before we start writing any code, let's take a look at the game concept.
 
-## City Escape!
+## Martian Run!
 This is the silly story I came up with: You are an alien and giant insects are attacking your city! Your goal is to escape by running as much as you can while avoiding all insects.
 
 ## Game Controls
@@ -45,47 +45,35 @@ This is what my setup looks like:
 Once you click on **Generate** the Gradle `clean` task will run and all libraries will be downloaded. You should see an output like the following:
 
 ```bash
-Generating app in /Users/wilmor24/Documents/idea/cityescape
-Executing '/Users/wilmor24/Documents/idea/cityescape/gradlew clean'
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-platform/1.0.0/gdx-platform-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-parent/1.0.0/gdx-parent-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d-platform/1.0.0/gdx-box2d-platform-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-platform/1.0.0/gdx-platform-1.0.0-natives-armeabi.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-platform/1.0.0/gdx-platform-1.0.0-natives-armeabi-v7a.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-platform/1.0.0/gdx-platform-1.0.0-natives-x86.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d-platform/1.0.0/gdx-box2d-platform-1.0.0-natives-armeabi.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d-platform/1.0.0/gdx-box2d-platform-1.0.0-natives-armeabi-v7a.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d-platform/1.0.0/gdx-box2d-platform-1.0.0-natives-x86.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-backend-android/1.0.0/gdx-backend-android-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d/1.0.0/gdx-box2d-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d-parent/1.0.0/gdx-box2d-parent-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx/1.0.0/gdx-1.0.0.pom
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx/1.0.0/gdx-1.0.0.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-box2d/1.0.0/gdx-box2d-1.0.0.jar
-Download http://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-backend-android/1.0.0/gdx-backend-android-1.0.0.jar
-:android:clean UP-TO-DATE
+Generating app in /Users/wilmor24/Downloads/martianrun
+Executing '/Users/wilmor24/Downloads/martianrun/gradlew clean --no-daemon'
+To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: http://gradle.org/docs/2.2/userguide/gradle_daemon.html.
+Parallel execution with configuration on demand is an incubating feature.
+:android:clean
+:desktop:clean
 :core:clean UP-TO-DATE
 :desktop:clean UP-TO-DATE
+:android:clean UP-TO-DATE
 
 BUILD SUCCESSFUL
 
-Total time: 30.126 secs
+Total time: 12.395 secs
 Done!
 To import in Eclipse: File -> Import -> Gradle -> Gradle Project
 To import to Intellij IDEA: File -> Import -> build.gradle
 To import to NetBeans: File -> Open Project...
 ```
 
-I won't go over importing the project into an IDE since it's part of a libGDX project setup and it is up to you which IDE to use (in case you are wondering, I'm using IntelliJ IDEA 13 at the time of this writing).
+I won't go over importing the project into an IDE since it's part of a libGDX project setup and it is up to you which IDE to use (in case you are wondering, I'm using IntelliJ IDEA 14 at the time of this writing).
 
 After successfully running the game in both desktop and Android, I usually clean up the boilerplate code set up by libGDX. That means, deleting the image `badlogic.jpg` that is added to the `assets` folder and leaving my game class like the following:
 
 ```java
-package com.gamestudio24.cityescape;
+package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.ApplicationAdapter;
 
-public class CityEscape extends ApplicationAdapter {
+public class MartianRun extends ApplicationAdapter {
 
     @Override
     public void create() {
@@ -105,11 +93,11 @@ The first thing we'll do is to make our game class extend `Game` so we can suppo
 My game class now looks like this:
 
 ```java
-package com.gamestudio24.cityescape;
+package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.Game;
 
-public class CityEscape extends Game {
+public class MartianRun extends Game {
 
     @Override
     public void create() {
@@ -126,7 +114,7 @@ Now create a `GameScreen` class inside a newly created `screens` package:
 _**NOTE: Assume all classes/packages are being added/modified inside our core module unless otherwise noted**_
 
 ```java
-package com.gamestudio24.cityescape.screens;
+package com.gamestudio24.martianrun.screens;
 
 import com.badlogic.gdx.Screen;
 
@@ -173,12 +161,12 @@ public class GameScreen implements Screen {
 Once created, we need to make our game class set our `GameScreen` on startup.
 
 ```java
-package com.gamestudio24.cityescape;
+package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.Game;
-import com.gamestudio24.cityescape.screens.GameScreen;
+import com.gamestudio24.martianrun.screens.GameScreen;
 
-public class CityEscape extends Game {
+public class MartianRun extends Game {
 
     @Override
     public void create() {
@@ -191,7 +179,7 @@ public class CityEscape extends Game {
 The last thing we need to do for our setup is to set the height and width of our game. We'll make this game 480x800. Let's store these values in a `Constants` class inside a `utils` package.
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 public class Constants {
 
@@ -204,19 +192,19 @@ public class Constants {
 Finally, configure our `DesktopLauncher` so it uses the correct measurements:
 
 ```java
-package com.gamestudio24.cityescape.desktop;
+package com.gamestudio24.martianrun.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.gamestudio24.cityescape.CityEscape;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.MartianRun;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class DesktopLauncher {
  public static void main (String[] arg) {
   LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = Constants.APP_WIDTH;
         config.height = Constants.APP_HEIGHT;
-  new LwjglApplication(new CityEscape(), config);
+  new LwjglApplication(new MartianRun(), config);
  }
 }
 ```
@@ -237,7 +225,7 @@ Our bodies will be created as follows:
 Let's make a class that takes care of creating our bodies. Create a `WorldUtils` class inside our `utils` package and create a function to set up the ground.
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -268,7 +256,7 @@ public class WorldUtils {
 The new constants added to our `Constants` class are the following: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -297,14 +285,14 @@ Ok, so we have these functions to create a world and the ground, but where do we
 Create a `GameStage` inside a `stages` package. This class will extend libGDX's `Stage` class. In the constructor, we'll use our `WorldUtils` class to create the world and the ground. At this point, we will be using the `Box2DDebugRenderer` to display what we have created so far. We'll use sprites later on once we are comfortable with the physics. The code is the following:
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.gamestudio24.cityescape.utils.WorldUtils;
+import com.gamestudio24.martianrun.utils.WorldUtils;
 
 public class GameStage extends Stage {
 
@@ -364,12 +352,12 @@ You probably noticed the _Fixed timestep_ comment inside the `render` function. 
 Finally, let's launch our `GameStage` inside our `GameScreen`. We'll be calling `act` and `draw` inside the `render` function:
 
 ```java
-package com.gamestudio24.cityescape.screens;
+package com.gamestudio24.martianrun.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.gamestudio24.cityescape.stages.GameStage;
+import com.gamestudio24.martianrun.stages.GameStage;
 
 public class GameScreen implements Screen {
 
@@ -401,4 +389,6 @@ Run the game and you'll see a green line at the bottom which is the outline of t
 
 In the [next part](/a-running-game-with-libgdx-part-2), we'll add our runner with some basic controls.
 
-If you have any questions or comments, feel free to let me know in the comments section. Cheers!
+If you have any questions or comments, feel free to let me know in the comments section. 
+
+Cheers!

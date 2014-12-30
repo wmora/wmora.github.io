@@ -12,7 +12,7 @@ tags:
 - TexturePacker
 redirect_from: 
 - /2014/06/a-running-game-with-libgdx-part-5.html
-assets_url: /assets/libgdx-cityescape-tutorial
+assets_url: /assets/libgdx-martianrun-tutorial
 ---
 
 Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
@@ -20,13 +20,13 @@ Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls
 We introduced our enemies on [part 3](/a-running-game-with-libgdx-part-3).
 We rendered our background and ground on [part 4](/a-running-game-with-libgdx-part-4).
 
-Remember the code is on [GitHub](https://github.com/wmora/cityescape). Graphics were made by [Kenney](http://www.kenney.nl/). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+Remember the code is on [GitHub](https://github.com/wmora/martianrun). Graphics were made by [Kenney](http://www.kenney.nl/). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
 ## Where Are My Characters?
 If are coming from the [previous part](/a-running-game-with-libgdx-part-4), you probably know that we stopped showing our runner and the enemies but hey, at least the background and the ground are looking good! In this next part we are going to display our characters again.
 
-Let's start with the runner (I know he's not the same as the one on my final version, sorry!). So, we have four states for our guy: he's either running, jumping, dodging or too busy getting hit by the enemies. We are going to store all his textures, along with the enemies', in a texture atlas. Here is the image (`characters.png`):
+Let's start with the runner (I know he's not the same as the one on the final version, sorry!). So, we have four states for our guy: he's either running, jumping, dodging or too busy getting hit by the enemies. We are going to store all his textures, along with the enemies', in a texture atlas. Here is the image (`characters.png`):
 
 [![]({{ page.assets_url }}/characters.png)]({{ page.assets_url }}/characters.png)
 
@@ -165,7 +165,7 @@ The texture regions when the runner is `hit`, `dodging` or `jumping` are easy to
 First, let's take note of all this in our `Constants` class: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -185,7 +185,7 @@ public class Constants {
 And in our `Runner` class, let's assign these `TextureRegion` objects along with the running `Animation`. 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -193,8 +193,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.RunnerUserData;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.box2d.RunnerUserData;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class Runner extends GameActor {
 
@@ -250,7 +250,7 @@ public class Runner extends GameActor {
 }
 ```
 
-That's all there is for animating the `Runner`. Run the project and see the guy run and get hit by the enemies we still don't see :D. The video below shows how the game looks so far:  
+That's all there is for animating the `Runner`. Run the project and see the guy run and get hit by the enemies we still don't see :D. The video below shows how the game looks so far (ignore the title, the original game name was modified before the first release):  
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-55c6e556d4987add" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D55c6e556d4987add%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9456123EAFA5D2FD68F2BEFDA4A4F0A06712C8E1.90F31FC8C17654A619CE3739E115754A288B56F%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D55c6e556d4987add%26offsetms%3D5000%26itag%3Dw160%26sigh%3DOyhix4sfX37SfHprMSMhg3vU-54&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D55c6e556d4987add%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9456123EAFA5D2FD68F2BEFDA4A4F0A06712C8E1.90F31FC8C17654A619CE3739E115754A288B56F%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D55c6e556d4987add%26offsetms%3D5000%26itag%3Dw160%26sigh%3DOyhix4sfX37SfHprMSMhg3vU-54&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
@@ -267,7 +267,7 @@ I will take advantage of our `EnemyType enum` to store all the texture region na
 Let's add these values in our `Constants`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -288,9 +288,9 @@ public class Constants {
 And as I mentioned before, use `EnemyType` to store these values: 
 
 ```java
-package com.gamestudio24.cityescape.enums;
+package com.gamestudio24.martianrun.enums;
 
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public enum EnemyType {
 
@@ -330,7 +330,7 @@ public enum EnemyType {
 Our `EnemyUserData` should now store the region names the `Enemy` should render. We'll pass the texture regions set in the constructor: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
 import ...
 
@@ -362,7 +362,7 @@ public class EnemyUserData extends UserData {
 And modify our `EnemyUserData` instantiation inside `WorldUtils`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
 
@@ -384,7 +384,7 @@ public class WorldUtils {
 Now we have all the assets we need to render the enemies! The logic to render them will be fairly similar to the logic we used to render our `Runner` with one exception. I'm rendering a bigger rectangle than the actual physics body (20% wider, 10% higher). The purpose of this is to make a little bit of overlapping possible between the runner and enemies so the hits look more real. The changes are the following: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -392,8 +392,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.EnemyUserData;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.box2d.EnemyUserData;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class Enemy extends GameActor {
 
@@ -424,14 +424,14 @@ public class Enemy extends GameActor {
 }
 ```
 
-Run the game and now you will see your fierce enemies coming towards you! Jump and dodge to avoid getting hit by any of them! The game should be working like in the video below: 
+Run the game and now you will see your fierce enemies coming towards you! Jump and dodge to avoid getting hit by any of them! The game should be working like in the video below (ignore the title, the original game name was modified before the first release): 
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-b8055468db2d6633" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db8055468db2d6633%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D50C5B1509C182BAD2AFAE929E35B667C9618C81.91D048475462ECA5A96979661D69D3DCF51E145C%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db8055468db2d6633%26offsetms%3D5000%26itag%3Dw160%26sigh%3D8OEzJx7ktj7CmzVWYUlr7bM9NzQ&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db8055468db2d6633%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D50C5B1509C182BAD2AFAE929E35B667C9618C81.91D048475462ECA5A96979661D69D3DCF51E145C%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db8055468db2d6633%26offsetms%3D5000%26itag%3Dw160%26sigh%3D8OEzJx7ktj7CmzVWYUlr7bM9NzQ&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
 Finally, I'd like to go back to our `Runner` drawing and apply the same ratio we just applied to our enemies (only 20% wider, though) so the overlapping also applies nicely to our `Runner`: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import ...
 
@@ -467,15 +467,15 @@ public class Runner extends GameActor {
 }
 ```
 
-Run the game one last time to make sure everything is working as expected:  
+Run the game one last time to make sure everything is working as expected (ignore the title, the original game name was modified before the first release):  
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-9308d88388421eb6" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D9308d88388421eb6%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D19E2A9FDB7DE4B74D1203D56BFD26FFABDB3A9B1.864348F0B9138C9993C5EF360F8655E4DB9F2B7E%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D9308d88388421eb6%26offsetms%3D5000%26itag%3Dw160%26sigh%3DOKeGtKxIzyZfGd8BVCPGfWRnzaE&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D9308d88388421eb6%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D19E2A9FDB7DE4B74D1203D56BFD26FFABDB3A9B1.864348F0B9138C9993C5EF360F8655E4DB9F2B7E%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D9308d88388421eb6%26offsetms%3D5000%26itag%3Dw160%26sigh%3DOKeGtKxIzyZfGd8BVCPGfWRnzaE&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
 ### That's a Wrap!
 Congrats on making it this far! I hope that this guide helped you understand a little better the basics of libGDX, using box2d and scene2d, and adding textures to your game. There are probably many things I could've done better, but I'm satisfied with the final product for teaching purposes.
 
-I added more stuff to the game such as UI controls for menus, playing music and sounds, integrated [Google Play Game Services](https://developers.google.com/games/services/downloads/) as well as tweaked it a little bit to gradually increase the speed of the game. That's fairly easy to implement and I think you can do it following libGDX's [wiki](https://github.com/libgdx/libgdx/wiki) and other [tutorials](https://github.com/libgdx/libgdx/wiki/External-tutorials). If I have time, I will add a few more posts for implementing them.
+I added more stuff to the game such as UI controls for menus, playing music and sounds, integrated [Google Play Game Services](https://developers.google.com/games/services/downloads/) as well as tweaked it a little bit to gradually increase the speed of the game. That's fairly easy to implement and I think you can do it following libGDX's [wiki](https://github.com/libgdx/libgdx/wiki) and other [tutorials](https://github.com/libgdx/libgdx/wiki/External-tutorials). Look at the [final code](https://github.com/wmora/martianrun) to see how I did it.
 
-Thanks for reading. If you liked this tutorial, I would really appreciate it if you could help spread the word by sharing this post.
+Thanks for reading. If you liked this tutorial, I would really appreciate it if you could help spread the word by sharing it.
 
 Cheers!

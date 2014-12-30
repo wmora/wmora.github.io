@@ -11,14 +11,14 @@ tags:
 - Android
 redirect_from: 
 - /2014/06/a-running-game-with-libgdx-part-4.html
-assets_url: /assets/libgdx-cityescape-tutorial
+assets_url: /assets/libgdx-martianrun-tutorial
 ---
 
 Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world setup!
 Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls for our runner!
 We introduced our enemies on [part 3](/a-running-game-with-libgdx-part-3).
 
-This is part 4 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/cityescape). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
+This is part 4 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/martianrun). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
 ## Graphics Would Be Nice!
@@ -38,7 +38,7 @@ We will be adding the following background to the game:
 But it would be nice to make the background look as if it is moving instead of a static one. For that I will be using the following technique: I will show two copies of the image and keep two rectangles that will determine the current position where each image should be rendered. We will save the background image inside the `$PROJECT_ROOT/android/assets/` path, and name it `background.png`. Let's keep track of the image path in our `Constants` class: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -53,7 +53,7 @@ public class Constants {
 Now let's create our `Background` class. Like I said before, it will keep a reference to a `TextureRegion` objects with two `Rectangle` objects. It will update the bounds of each `Rectangle` in the -x direction at a constant speed and when one of the `Rectangle` bounds reaches the end of the screen, reset both boundaries. Note that this class extends `Actor` and not our `GameActor`. This is because we don't really need any of the `box2d` elements since the background is not really a game character: 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -61,7 +61,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class Background extends Actor {
 
@@ -116,18 +116,18 @@ Now on to the `GameStage`. We need to get rid of our `Box2dDebugRenderer` (the u
 For now, we will only render our newly created `Background`: 
 
 ```java
-package com.gamestudio24.cityescape.stages;
+package com.gamestudio24.martianrun.stages;
 
 import ...
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.gamestudio24.cityescape.actors.Background;
-import com.gamestudio24.cityescape.actors.Enemy;
-import com.gamestudio24.cityescape.actors.Ground;
-import com.gamestudio24.cityescape.actors.Runner;
-import com.gamestudio24.cityescape.utils.BodyUtils;
-import com.gamestudio24.cityescape.utils.Constants;
-import com.gamestudio24.cityescape.utils.WorldUtils;
+import com.gamestudio24.martianrun.actors.Background;
+import com.gamestudio24.martianrun.actors.Enemy;
+import com.gamestudio24.martianrun.actors.Ground;
+import com.gamestudio24.martianrun.actors.Runner;
+import com.gamestudio24.martianrun.utils.BodyUtils;
+import com.gamestudio24.martianrun.utils.Constants;
+import com.gamestudio24.martianrun.utils.WorldUtils;
 
 public class GameStage extends Stage implements ContactListener {
 
@@ -160,7 +160,7 @@ public class GameStage extends Stage implements ContactListener {
 }
 ```
 
-Run the game and you will see a nice, smooth animation of a moving background just like the video below:  
+Run the game and you will see a nice, smooth animation of a moving background just like the video below (ignore the title, the original game name was modified before the first release):  
 
 <div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-b6ef51add911a795" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db6ef51add911a795%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9BDB5665F6D7733F472AF2C3EC92062787A6B748.3212499AC4104F49A3E8D4642951DFBE974E27B8%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db6ef51add911a795%26offsetms%3D5000%26itag%3Dw160%26sigh%3DvOcyKUcNdZQknhX1XSdl7AOYk3E&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db6ef51add911a795%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9BDB5665F6D7733F472AF2C3EC92062787A6B748.3212499AC4104F49A3E8D4642951DFBE974E27B8%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db6ef51add911a795%26offsetms%3D5000%26itag%3Dw160%26sigh%3DvOcyKUcNdZQknhX1XSdl7AOYk3E&autoplay=0&ps=blogger" allowFullScreen="true" /></object> </div>
 
@@ -174,7 +174,7 @@ For the ground, I will pretty much follow the same logic we used for the backgro
 I know that I should have all my textures in an atlas but I am making an exception with the ground so I can have a good image quality since I will stretch the image a lot. Let's keep track of the image name (`ground.png` inside the `assets` directory) in our `Constants` class along with the previous one:
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -191,13 +191,13 @@ public class Constants {
 Now, one thing to note is that when we rendered the `Background` we used rectangles the size of the screen to know where to render. That was fine since we got a nice image which has the same size as the screen measurements we are working with. We don't really want to do that for the other `GameActor` objects since we will be working with smaller images. In order to know the current `Rectangle` that we are supposed to render in screen coordinates, I am going to add a `screenRectangle` to my `GameActor` and update it in its `act()` method. I'm also going to check if the `GameActor`'s `Body` was destroyed by the `GameStage` (this happens when an `Enemy` or the `Runner` go out of bounds:  
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.gamestudio24.cityescape.box2d.UserData;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.box2d.UserData;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public abstract class GameActor extends Actor {
 
@@ -247,7 +247,7 @@ public abstract class GameActor extends Actor {
 I mentioned before that I am translating 1 meter as 32 pixels. You can translate the units using whatever ratio works for you. The value goes in the `Constants`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -263,9 +263,9 @@ public class Constants {
 Since we are going to be working with the body's position, we should change the way we create our `Ground` in `WorldUtils`. Before doing so, we have to match the `GroundUserData` constructor with its parent's to store the `width` and `height`: 
 
 ```java
-package com.gamestudio24.cityescape.box2d;
+package com.gamestudio24.martianrun.box2d;
 
-import com.gamestudio24.cityescape.enums.UserDataType;
+import com.gamestudio24.martianrun.enums.UserDataType;
 
 public class GroundUserData extends UserData {
 
@@ -280,7 +280,7 @@ public class GroundUserData extends UserData {
 Now we can make the change in `WorldUtils`: 
 
 ```java
-package com.gamestudio24.cityescape.utils;
+package com.gamestudio24.martianrun.utils;
 
 import ...
 
@@ -303,7 +303,7 @@ public class WorldUtils {
 And now we apply pretty much the same logic we applied to the background in order to render the `Ground` with the exception of the texture loading (Note that I'm being lazy and should reuse the same methods from the `Background` class instead of copying them): 
 
 ```java
-package com.gamestudio24.cityescape.actors;
+package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -311,8 +311,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.gamestudio24.cityescape.box2d.GroundUserData;
-import com.gamestudio24.cityescape.utils.Constants;
+import com.gamestudio24.martianrun.box2d.GroundUserData;
+import com.gamestudio24.martianrun.utils.Constants;
 
 public class Ground extends GameActor {
 
@@ -372,7 +372,7 @@ public class Ground extends GameActor {
 }
 ```
 
-Now run the game and you should see the `Background` getting rendered along with the `Ground` just like it's shown on the video below: 
+Now run the game and you should see the `Background` getting rendered along with the `Ground` just like it's shown on the video below (ignore the title, the original game name was modified before the first release): 
 
 <div style="text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-b758ffe285faf2cb" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db758ffe285faf2cb%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D958DFE0010FF9D5FB813FE7428D2775D1EB19EB7.4A29AC29C99297F1B6C619F18AEEFA4DF076D641%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db758ffe285faf2cb%26offsetms%3D5000%26itag%3Dw160%26sigh%3DEYlfHsqxE8EGf8h5XsV_DsasWkc&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db758ffe285faf2cb%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D958DFE0010FF9D5FB813FE7428D2775D1EB19EB7.4A29AC29C99297F1B6C619F18AEEFA4DF076D641%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db758ffe285faf2cb%26offsetms%3D5000%26itag%3Dw160%26sigh%3DEYlfHsqxE8EGf8h5XsV_DsasWkc&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
 
