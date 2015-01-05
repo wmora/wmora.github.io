@@ -383,7 +383,7 @@ public class GameScreen implements Screen {
 }
 ```
 
-Run the game and you'll see a green line at the bottom which is the outline of the box we added to our world (the ground). Your game should look like the image below (ignore the title, the original game name was modified before the first release):
+Run the game and you'll see a green line at the bottom which is the outline of the box we added to our world (the ground). Your game should look like the image below:
 
 <img src="{{ page.assets_url }}/world_with_ground.png" width=480 />
 
