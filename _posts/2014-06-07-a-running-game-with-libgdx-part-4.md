@@ -162,7 +162,7 @@ public class GameStage extends Stage implements ContactListener {
 }
 ```
 
-Run the game and you will see a nice, smooth animation of a moving background just like the video below (ignore the title, the original game name was modified before the first release):  
+Run the game and you will see a nice, smooth animation of a moving background just like the video below:  
 
 <iframe width="320" height="266" src="http://www.youtube.com/embed/3eIU1uO2sEg" frameborder="0" allowfullscreen></iframe>
 
@@ -374,7 +374,7 @@ public class Ground extends GameActor {
 }
 ```
 
-Now run the game and you should see the `Background` getting rendered along with the `Ground` just like it's shown on the video below (ignore the title, the original game name was modified before the first release): 
+Now run the game and you should see the `Background` getting rendered along with the `Ground` just like it's shown on the video below: 
 
 <<iframe width="320" height="266" src="http://www.youtube.com/embed/8dl-9dqbRO8" frameborder="0" allowfullscreen></iframe>
 
