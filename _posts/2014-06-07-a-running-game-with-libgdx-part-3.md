@@ -119,21 +119,21 @@ import java.util.Random;
 public class RandomUtils {
 
     public static EnemyType getRandomEnemyType() {
-        RandomEnum<enemytype> randomEnum = new RandomEnum<enemytype>(EnemyType.class);
+        RandomEnum<EnemyType> randomEnum = new RandomEnum<EnemyType>(EnemyType.class);
         return randomEnum.random();
     }
 
     /**
      * @see [Stack Overflow](http://stackoverflow.com/a/1973018)
-     * @param <e>
+     * @param <E>
      */
 
-    private static class RandomEnum&ltE extends Enum&gt {
+    private static class RandomEnum<E extends Enum> {
 
         private static final Random RND = new Random();
         private final E[] values;
 
-        public RandomEnum(Class&lte&gt token) {
+        public RandomEnum(Class<E> token) {
             values = token.getEnumConstants();
         }
 
@@ -484,7 +484,7 @@ public class GameStage extends Stage implements ContactListener {
     public void act(float delta) {
         super.act(delta);
 
-        Array<body> bodies = new Array<body>(world.getBodyCount());
+        Array<Body> bodies = new Array<Body>(world.getBodyCount());
         world.getBodies(bodies);
 
         // Fixed timestep
@@ -538,7 +538,7 @@ public class GameStage extends Stage implements ContactListener {
 
 And we've got ourselves a game! Run the game and you'll get "enemies" of different types moving towards the runner. You have to jump or dodge to avoid getting hit by any of them. The following video shows the game at this point (ignore the title, the original game name was modified before the first release): 
 
-<div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-e6f04ccb1a244a30" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3De6f04ccb1a244a30%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D4EBE4DF7BF1C934BDC99048C1D0B7B14D50C702B.24CD8D38960F0C55766474DFB7DB9E6908A6F8EA%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3De6f04ccb1a244a30%26offsetms%3D5000%26itag%3Dw160%26sigh%3DB6dnNI25aIdo5KwVM78DutjNyfE&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
+<iframe width="320" height="266" src="http://www.youtube.com/embed/X-jEZHDN-gw" frameborder="0" allowfullscreen></iframe>
 
 At this point, I think enough has been covered to understand the basics of implementing a running game. In the next parts of this guide I will add some more stuff to make the game a little more fun, but I recommend you take it from here and customize it as you wish. 
 [Click here](/a-running-game-with-libgdx-part-4) for part 4. 
