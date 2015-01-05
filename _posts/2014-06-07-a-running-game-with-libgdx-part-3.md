@@ -487,6 +487,10 @@ public class GameStage extends Stage implements ContactListener {
         Array<Body> bodies = new Array<Body>(world.getBodyCount());
         world.getBodies(bodies);
 
+        for (Body body : bodies) {
+            update(body);
+        }
+
         // Fixed timestep
         accumulator += delta;
 
