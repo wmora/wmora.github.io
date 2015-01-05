@@ -101,7 +101,7 @@ public class GameStage extends Stage {
 }
 ```
 
-Run the game again and you should now see the runner (a box) standing there doing nothing, like the image below (ignore the title, the original game name was modified before the first release):
+Run the game again and you should now see the runner (a box) standing there doing nothing, like the image below:
 
 <img src="{{ page.assets_url }}/box.png" width=480 />
 
@@ -130,6 +130,7 @@ With the base class done, I'll add a `Ground` class for our ground:
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
+import com.gamestudio24.martianrun.box2d.GroundUserData;
 
 public class Ground extends GameActor {
 
@@ -548,6 +549,7 @@ public class GameStage extends Stage implements ContactListener {
 
     private void setUpWorld() {
         world = WorldUtils.createWorld();
+        // Let the world now you are handling contacts
         world.setContactListener(this);
         setUpGround();
         setUpRunner();
@@ -755,7 +757,7 @@ public class GameStage extends Stage implements ContactListener {
 Our dodging functionality is done! Run the game and go ahead and touch and hold the left side of the screen; you should now be able to dodge. The jump functionality stays the same.  
 The video shows how the game is working at this point (ignore the title, the original game name was modified before the first release):  
 
-<div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-2fc7011b469f2d0b" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D2fc7011b469f2d0b%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D11E61D0F30A3B96A77C0E2536384DEF2EE909B71.186C406C8E696047AC1D87B5C221C067B6E0A3A3%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D2fc7011b469f2d0b%26offsetms%3D5000%26itag%3Dw160%26sigh%3D4aDT3eLqZrCXhHlSYgxR8qDWRPU&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3D2fc7011b469f2d0b%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D11E61D0F30A3B96A77C0E2536384DEF2EE909B71.186C406C8E696047AC1D87B5C221C067B6E0A3A3%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3D2fc7011b469f2d0b%26offsetms%3D5000%26itag%3Dw160%26sigh%3D4aDT3eLqZrCXhHlSYgxR8qDWRPU&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
+<iframe width="320" height="266" src="http://www.youtube.com/embed/RDFV6prbhr8" frameborder="0" allowfullscreen></iframe>
 
 Very nice, isn't it? So, what about the running part? We will keep our runner fixed at this position and make the objects move towards him, the animations will give the illusion of the runner moving forward. This means we are done with our runner's controls!
 
