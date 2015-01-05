@@ -157,12 +157,14 @@ public class GameStage extends Stage implements ContactListener {
         addActor(new Background());
     }
 
+    /** Remove the draw method since we won't use the DebugRenderer anymore **/
+
 }
 ```
 
 Run the game and you will see a nice, smooth animation of a moving background just like the video below (ignore the title, the original game name was modified before the first release):  
 
-<div class="separator" style="clear: both; text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-b6ef51add911a795" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db6ef51add911a795%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9BDB5665F6D7733F472AF2C3EC92062787A6B748.3212499AC4104F49A3E8D4642951DFBE974E27B8%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db6ef51add911a795%26offsetms%3D5000%26itag%3Dw160%26sigh%3DvOcyKUcNdZQknhX1XSdl7AOYk3E&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db6ef51add911a795%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D9BDB5665F6D7733F472AF2C3EC92062787A6B748.3212499AC4104F49A3E8D4642951DFBE974E27B8%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db6ef51add911a795%26offsetms%3D5000%26itag%3Dw160%26sigh%3DvOcyKUcNdZQknhX1XSdl7AOYk3E&autoplay=0&ps=blogger" allowFullScreen="true" /></object> </div>
+<iframe width="320" height="266" src="http://www.youtube.com/embed/3eIU1uO2sEg" frameborder="0" allowfullscreen></iframe>
 
 Whoa! So what happened to the game? The ground, runner and enemies are still there, we are just not rendering them anymore with the `Box2dDebugRenderer`. That means the game started, an enemy came towards the runner and probably hit him without us noticing :D. 
 
@@ -374,7 +376,7 @@ public class Ground extends GameActor {
 
 Now run the game and you should see the `Background` getting rendered along with the `Ground` just like it's shown on the video below (ignore the title, the original game name was modified before the first release): 
 
-<div style="text-align: center;"><object width="320" height="266" class="BLOG_video_class" id="BLOG_video-b758ffe285faf2cb" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="movie" value="//www.youtube.com/get_player"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="flashvars" value="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db758ffe285faf2cb%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D958DFE0010FF9D5FB813FE7428D2775D1EB19EB7.4A29AC29C99297F1B6C619F18AEEFA4DF076D641%26key%3Dck2&amp;iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db758ffe285faf2cb%26offsetms%3D5000%26itag%3Dw160%26sigh%3DEYlfHsqxE8EGf8h5XsV_DsasWkc&amp;autoplay=0&amp;ps=blogger"><embed src="//www.youtube.com/get_player" type="application/x-shockwave-flash" width="320" height="266" bgcolor="#FFFFFF" flashvars="flvurl=http://redirector.googlevideo.com/videoplayback?id%3Db758ffe285faf2cb%26itag%3D5%26source%3Dblogger%26app%3Dblogger%26cmo%3Dsensitive_content%253Dyes%26ip%3D0.0.0.0%26ipbits%3D0%26expire%3D1421596483%26sparams%3Did,itag,source,ip,ipbits,expire%26signature%3D958DFE0010FF9D5FB813FE7428D2775D1EB19EB7.4A29AC29C99297F1B6C619F18AEEFA4DF076D641%26key%3Dck2&iurl=http://video.google.com/ThumbnailServer2?app%3Dblogger%26contentid%3Db758ffe285faf2cb%26offsetms%3D5000%26itag%3Dw160%26sigh%3DEYlfHsqxE8EGf8h5XsV_DsasWkc&autoplay=0&ps=blogger" allowFullScreen="true" /></object></div>
+<<iframe width="320" height="266" src="http://www.youtube.com/embed/8dl-9dqbRO8" frameborder="0" allowfullscreen></iframe>
 
 The game looks really good so far, even though we lost our characters :D. Let's work with that on the next part.
 
