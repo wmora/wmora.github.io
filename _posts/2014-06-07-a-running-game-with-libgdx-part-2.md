@@ -757,7 +757,7 @@ public class GameStage extends Stage implements ContactListener {
 Our dodging functionality is done! Run the game and go ahead and touch and hold the left side of the screen; you should now be able to dodge. The jump functionality stays the same.  
 The video shows how the game is working at this point (ignore the title, the original game name was modified before the first release):  
 
-<iframe width="320" height="266" src="http://www.youtube.com/embed/RDFV6prbhr8" frameborder="0" allowfullscreen></iframe>
+<iframe width="320" height="266" src="http://www.youtube.com/embed/mTqXzjK4WLY" frameborder="0" allowfullscreen></iframe>
 
 Very nice, isn't it? So, what about the running part? We will keep our runner fixed at this position and make the objects move towards him, the animations will give the illusion of the runner moving forward. This means we are done with our runner's controls!
 
