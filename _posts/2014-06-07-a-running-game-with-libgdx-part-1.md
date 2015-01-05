@@ -200,11 +200,11 @@ import com.gamestudio24.martianrun.MartianRun;
 import com.gamestudio24.martianrun.utils.Constants;
 
 public class DesktopLauncher {
- public static void main (String[] arg) {
-  LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+    public static void main (String[] arg) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = Constants.APP_WIDTH;
         config.height = Constants.APP_HEIGHT;
-  new LwjglApplication(new MartianRun(), config);
+        new LwjglApplication(new MartianRun(), config);
  }
 }
 ```
@@ -269,7 +269,7 @@ public class Constants {
 
     public static final float GROUND_X = 0;
     public static final float GROUND_Y = 0;
-    public static final float GROUND_WIDTH = 25f;
+    public static final float GROUND_WIDTH = 50f;
     public static final float GROUND_HEIGHT = 2f;
     public static final float GROUND_DENSITY = 0f;
 
@@ -280,7 +280,7 @@ Let's take a look at what we just did. We defined a utility class `WorldUtils` w
 
 The world is created with a gravity of -10 m/s^2. Box2d works best when using real physics values. In fact, the documentation warns the engine to be buggy if using exaggerated world values.
 
-Ok, so we have these functions to create a world and the ground, but where do we use them? We could use them inside our `GameScreen;` instead, we will add them to a `Stage` which will be added to the `GameScreen`. A `Stage` is part of scene2d and is an input processor that can hold many `Actor` objects and handle their drawing and input events. We will add Actors later on but it is better to set up the `Stage` now so we don't have to move the code from the `GameScreen` later on.
+Ok, so we have these functions to create a world and the ground, but where do we use them? We could use them inside our `GameScreen`; instead, we will add them to a `Stage` which will be added to the `GameScreen`. A `Stage` is part of scene2d and is an input processor that can hold many `Actor` objects and handle their drawing and input events. We will add Actors later on but it is better to set up the `Stage` now so we don't have to move the code from the `GameScreen` later on.
 
 Create a `GameStage` inside a `stages` package. This class will extend libGDX's `Stage` class. In the constructor, we'll use our `WorldUtils` class to create the world and the ground. At this point, we will be using the `Box2DDebugRenderer` to display what we have created so far. We'll use sprites later on once we are comfortable with the physics. The code is the following:
 
@@ -347,7 +347,7 @@ public class GameStage extends Stage {
 }
 ```
 
-You probably noticed the _Fixed timestep_ comment inside the `render` function. Like the libGDX box2d documentation says, stepping the simulation is a topic itself. I followed [this](http://gafferongames.com/game-physics/fix-your-timestep/) article to implement my version of fixed timestep. We probably need to implement interpolation as well, but I'll leave it as a TODO for now.
+You probably noticed the _Fixed timestep_ comment inside the `render` function. Like the libGDX box2d documentation says, stepping the simulation is a topic itself. I followed [this](http://gafferongames.com/game-physics/fix-your-timestep/) article to implement my version of fixed timestep. We probably need to implement interpolation as well, but I'll leave it as a _TODO_ for now.
 
 Finally, let's launch our `GameStage` inside our `GameScreen`. We'll be calling `act` and `draw` inside the `render` function:
 
