@@ -4,7 +4,7 @@ share: false
 display_ad: false
 display_donate: false
 ---
-I am all about software development, having worked in numerous projects with a wide range of technologies. I currently work at [MercadoLibre.com](http://www.mercadolibre.com) and work on personal projects in my spare time. I share as much knowledge as time lets me.
+I am all about software development, having worked in numerous projects with a wide range of technologies. I share as much knowledge as time lets me.
 
 You can contact me at:
 
