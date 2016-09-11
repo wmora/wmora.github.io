@@ -11,7 +11,6 @@ isso_domain:
 ga_tracking_id: UA-39417110-1
 
 # Build settings
-highlighter: pygments
 source: .
 permalink: /:title
 
