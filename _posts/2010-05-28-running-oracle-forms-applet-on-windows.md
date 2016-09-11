@@ -1,8 +1,8 @@
---- 
+---
 title: Running an Oracle Forms Applet on Windows 7
 date: "2010-05-28T19:26:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - windows 7
 - Oracle 10g
 - Java
@@ -13,11 +13,11 @@ tags:
 - graphics card
 - Oracle
 - jdk
-redirect_from: 
+redirect_from:
 - /2010/05/running-oracle-forms-applet-on-windows.html
 ---
 
-I was trying to run my application built in Oracle Forms and Reports on a new  laptop with Windows 7. However, when running the Java forms applet, the applet’s  graphics stayed frozen and I was not able to see my application properly. 
+I was trying to run my application built in Oracle Forms and Reports on a new  laptop with Windows 7. However, when running the Java forms applet, the applet’s  graphics stayed frozen and I was not able to see my application properly.
 
 This problem is caused due to the graphics card running on the computer  running Windows 7. To run certain applications, Windows 7 must change its theme  back to Windows 7 Basic (I believe it was the same issue with Vista). So, basically, the graphics card is too much for the Java applet to handle.
 
@@ -32,17 +32,17 @@ Although it was not the most elegant solution (I was on a deadline!), I decided 
 
 3) Created the .bat (I saved it as screenRefresher.bat) file to be launched with the application with the lines:
 
-```bash
+{% highlight bash %}
 echo off
 nircmd setdisplay 1360 768 16
 nircmd setdisplay 1360 768 32
-```
+{% endhighlight %}
 
 Of course, the 1360 768 should correspond to your particular screen settings. What the batch file is basically doing is quickly changing the screen display colors to 16 bits and then to 32 bits. This is just a dummy operation so the screen refreshes at runtime.
 
 4) Finally, edited the html to run the batch file when loading. This is the section I modified:
 
-```html
+{% highlight html %}
 <html>
 <head>
 <script type="text/javascript">
@@ -58,7 +58,7 @@ WshShell.Run ('file://C:/appLocation/html/screenRefresher.bat',1,true);
 <!--Body content-->
 <body>
 <html>
-```
+{% endhighlight %}
 
 5) Changed the security settings of Internet Explorer so it allows running Active X objects
 

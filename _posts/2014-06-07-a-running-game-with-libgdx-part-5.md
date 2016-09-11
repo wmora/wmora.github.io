@@ -1,8 +1,8 @@
---- 
+---
 title: LibGDX Tutorial - A Running Game with libGDX - Part 5
 date: "2014-06-07T10:09:00.001-03:00"
 author: William Mora
-tags: 
+tags:
 - Java
 - software development
 - libGDX
@@ -10,7 +10,7 @@ tags:
 - texture atlas
 - Android
 - TexturePacker
-redirect_from: 
+redirect_from:
 - /2014/06/a-running-game-with-libgdx-part-5.html
 assets_url: /assets/libgdx-martianrun-tutorial
 ---
@@ -23,6 +23,7 @@ We rendered our background and ground on [part 4](/a-running-game-with-libgdx-pa
 Remember the code is on [GitHub](https://github.com/wmora/martianrun). Graphics were made by [Kenney](http://www.kenney.nl/). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
+
 ## Where Are My Characters?
 If are coming from the [previous part](/a-running-game-with-libgdx-part-4), you probably know that we stopped showing our runner and the enemies but hey, at least the background and the ground are looking good! In this next part we are going to display our characters again.
 
@@ -32,7 +33,7 @@ Let's start with the runner (I know he's not the same as the one on the final ve
 
 And the following is the texture file (`characters.txt`):
 
-```
+{% highlight yaml %}
 characters.png
 format: RGBA8888
 filter: Linear,Linear
@@ -156,15 +157,15 @@ spider_walk1
   orig: 72, 51
   offset: 0, 0
   index: -1
-```
+{% endhighlight %}
 
-So if you are new to this you are probably asking yourself "What kind of sorcery is this?". Well, I used [TexturePacker](http://www.codeandweb.com/texturepacker) to put together my `.png` files (they have an option for libGDX textures) and the two files were automatically generated. LibGDX also has its own [TexturePacker](https://github.com/libgdx/libgdx/wiki/Texture-packer) but I've never tried it. My guess is that it would work even better for this game. Both of these files are stored in the `assets` directory. 
+So if you are new to this you are probably asking yourself "What kind of sorcery is this?". Well, I used [TexturePacker](http://www.codeandweb.com/texturepacker) to put together my `.png` files (they have an option for libGDX textures) and the two files were automatically generated. LibGDX also has its own [TexturePacker](https://github.com/libgdx/libgdx/wiki/Texture-packer) but I've never tried it. My guess is that it would work even better for this game. Both of these files are stored in the `assets` directory.
 
-The texture regions when the runner is `hit`, `dodging` or `jumping` are easy to get since they consist of a static frame (alienGreen_hit, alienGreen_dodge, and alienGreen_jump), we set a separate `TextureRegion` for each state and apply it inside our `draw` function. For the running state, we have two frames (alienGreen_run1 and alienGreen_run2) which we'll use to create an `Animation`. 
+The texture regions when the runner is `hit`, `dodging` or `jumping` are easy to get since they consist of a static frame (alienGreen_hit, alienGreen_dodge, and alienGreen_jump), we set a separate `TextureRegion` for each state and apply it inside our `draw` function. For the running state, we have two frames (alienGreen_run1 and alienGreen_run2) which we'll use to create an `Animation`.
 
-First, let's take note of all this in our `Constants` class: 
+First, let's take note of all this in our `Constants` class:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -180,11 +181,11 @@ public class Constants {
     public static final String RUNNER_JUMPING_REGION_NAME = "alienGreen_jump";
 
 }
-```
+{% endhighlight %}
 
-And in our `Runner` class, let's assign these `TextureRegion` objects along with the running `Animation`. 
+And in our `Runner` class, let's assign these `TextureRegion` objects along with the running `Animation`.
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
@@ -248,7 +249,7 @@ public class Runner extends GameActor {
     ...
 
 }
-```
+{% endhighlight %}
 
 That's all there is for animating the `Runner`. Run the project and see the guy run and get hit by the enemies we still don't see :D. The video below shows how the game looks so far:  
 
@@ -264,9 +265,9 @@ I will take advantage of our `EnemyType enum` to store all the texture region na
 *   Flying small - bee
 *   Flying wide - fly
 
-Let's add these values in our `Constants`: 
+Let's add these values in our `Constants`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -283,11 +284,11 @@ public class Constants {
     public static final String[] FLYING_WIDE_ENEMY_REGION_NAMES = new String[] {"fly_fly1", "fly_fly2"};
 
 }
-```
+{% endhighlight %}
 
-And as I mentioned before, use `EnemyType` to store these values: 
+And as I mentioned before, use `EnemyType` to store these values:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.enums;
 
 import com.gamestudio24.martianrun.utils.Constants;
@@ -325,11 +326,11 @@ public enum EnemyType {
         return regions;
     }
 }
-```
+{% endhighlight %}
 
-Our `EnemyUserData` should now store the region names the `Enemy` should render. We'll pass the texture regions set in the constructor: 
+Our `EnemyUserData` should now store the region names the `Enemy` should render. We'll pass the texture regions set in the constructor:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import ...
@@ -358,10 +359,10 @@ public class EnemyUserData extends UserData {
         return textureRegions;
     }
 }
-```
-And modify our `EnemyUserData` instantiation inside `WorldUtils`: 
+{% endhighlight %}
+And modify our `EnemyUserData` instantiation inside `WorldUtils`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import ...
@@ -379,11 +380,11 @@ public class WorldUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-Now we have all the assets we need to render the enemies! The logic to render them will be fairly similar to the logic we used to render our `Runner` with one exception. I'm rendering a bigger rectangle than the actual physics body (20% wider, 10% higher). The purpose of this is to make a little bit of overlapping possible between the runner and enemies so the hits look more real. The changes are the following: 
+Now we have all the assets we need to render the enemies! The logic to render them will be fairly similar to the logic we used to render our `Runner` with one exception. I'm rendering a bigger rectangle than the actual physics body (20% wider, 10% higher). The purpose of this is to make a little bit of overlapping possible between the runner and enemies so the hits look more real. The changes are the following:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.Gdx;
@@ -418,19 +419,19 @@ public class Enemy extends GameActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         stateTime += Gdx.graphics.getDeltaTime();
-        batch.draw(animation.getKeyFrame(stateTime, true), (screenRectangle.x - (screenRectangle.width * 0.1f)), 
+        batch.draw(animation.getKeyFrame(stateTime, true), (screenRectangle.x - (screenRectangle.width * 0.1f)),
                 screenRectangle.y, screenRectangle.width * 1.2f, screenRectangle.height * 1.1f);
     }
 }
-```
+{% endhighlight %}
 
-Run the game and now you will see your fierce enemies coming towards you! Jump and dodge to avoid getting hit by any of them! The game should be working like in the video below (ignore the title, the original game name was modified before the first release): 
+Run the game and now you will see your fierce enemies coming towards you! Jump and dodge to avoid getting hit by any of them! The game should be working like in the video below (ignore the title, the original game name was modified before the first release):
 
 <iframe width="320" height="266" src="http://www.youtube.com/embed/oga63v_RucU" frameborder="0" allowfullscreen></iframe>
 
-Finally, I'd like to go back to our `Runner` drawing and apply the same ratio we just applied to our enemies (only 20% wider, though) so the overlapping also applies nicely to our `Runner`: 
+Finally, I'd like to go back to our `Runner` drawing and apply the same ratio we just applied to our enemies (only 20% wider, though) so the overlapping also applies nicely to our `Runner`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import ...
@@ -465,7 +466,7 @@ public class Runner extends GameActor {
     ...
 
 }
-```
+{% endhighlight %}
 
 Run the game one last time to make sure everything is working as expected (ignore the title, the original game name was modified before the first release):  
 

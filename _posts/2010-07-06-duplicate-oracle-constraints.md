@@ -1,8 +1,8 @@
---- 
+---
 title: Duplicate Oracle Constraints
 date: "2010-07-06T22:35:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - foreign key
 - PL/SQL
 - DBA
@@ -11,30 +11,30 @@ tags:
 - constraints
 - Oracle
 - SQL
-redirect_from: 
+redirect_from:
 - /2010/07/duplicate-oracle-constraints.html
 ---
 
 If you have ever used the Oracle import utility, your database has system generated constraint names (ex: `SYS_C00641321`), and you did not specify `CONSTRAINTS=N` during the import then chances are you have duplicate constraints for pretty much every constraint except for any `PRIMARY KEY`, `FOREIGN KEY` and user generated constraint names.  I recently stumbled upon a database that had performance issues and one of the things I noticed was that almost every single constraint was repeated up to 10 times. Most of the duplicates were `NOT NULL` constraints, which is kind of expected since people tend to create `NOT NULL` constraints anonymously such as the following:  
 
-```sql
+{% highlight sql %}
 CREATE TABLE tab1
 (col1  VARCHAR(2) NOT NULL,
 col2  VARCHAR(30) NOT NULL);
-```
+{% endhighlight %}
 
 That statement will create 2 `NOT NULL` constraints with a system generated name (ex: `SYS_C00641322` and `SYS_C00641323`). If the schema that owns that table is exported and then imported to another schema, it will create two additional `NOT NULL` constraints since it recreates the table running the exact same command shown above. That could be prevented by having user generated constraint names:  
 
 <!--more-->
-```sql
+{% highlight sql %}
 CREATE TABLE tab1
 (col1  VARCHAR(2) CONSTRAINT COL1_NN NOT NULL,
 col2  VARCHAR(30) CONSTRAINT COL2_NN NOT NULL);
-``` 
+{% endhighlight %}
 
-If the schema that owns that table is exported and then imported to another schema, it does not create duplicate any constraints since the system is forced to specify the constraint name at table creation.  Here is my script to identify the duplicate constraints and then generate a script to drop those unnecessary constraints. The logic is to create two temporary tables: One that lists all the constraints (except for `PRIMARY KEY` and `FOREIGN KEY` constraints) that should be in the database and another table where I put all the necessary information for the constraints that need to be dropped. Once the table `DUMP_CONSTRAINTS` is populated, a script is generated to drop all those constraints. Finally, I dropped the temporary tables that I used: 
+If the schema that owns that table is exported and then imported to another schema, it does not create duplicate any constraints since the system is forced to specify the constraint name at table creation.  Here is my script to identify the duplicate constraints and then generate a script to drop those unnecessary constraints. The logic is to create two temporary tables: One that lists all the constraints (except for `PRIMARY KEY` and `FOREIGN KEY` constraints) that should be in the database and another table where I put all the necessary information for the constraints that need to be dropped. Once the table `DUMP_CONSTRAINTS` is populated, a script is generated to drop all those constraints. Finally, I dropped the temporary tables that I used:
 
-```sql
+{% highlight sql %}
 CREATE GLOBAL TEMPORARY TABLE temp_constraints
 (table_name       varchar2(30),
 constraint_name  varchar2(30),
@@ -88,6 +88,6 @@ DROP TABLE temp_constraints CASCADE CONSTRAINTS;
 /
 DROP TABLE dump_constraints CASCADE CONSTRAINTS;
 /
-```
+{% endhighlight %}
 
 So, how to prevent this from ever happening again? You could either: 1) Make sure that an import does not import any constraints (just set `CONSTRAINTS=N` when importing) 2) Make sure you properly name ALL constraints. Do not let the system generate a constraint name for you (like previously mentioned)  I hope this helps anyone out there. Feel free to leave a comment if you have any questions.

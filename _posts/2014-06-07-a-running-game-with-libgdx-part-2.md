@@ -1,15 +1,15 @@
---- 
+---
 title: LibGDX Tutorial - A Running Game with libGDX - Part 2
 date: "2014-06-07T10:02:00.001-03:00"
 author: William Mora
-tags: 
+tags:
 - Java
 - box2d
 - software development
 - libGDX
 - video games
 - Android
-redirect_from: 
+redirect_from:
 - /2014/06/a-running-game-with-libgdx-part-2.html
 assets_url: /assets/libgdx-martianrun-tutorial
 ---
@@ -19,12 +19,13 @@ Check out [part 1](/a-running-game-with-libgdx-part-1) for the project and world
 This is part 2 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/martianrun). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
+
 ## Run, Jump and Dodge!
 The next step is to create our main guy, the runner. He will be a dynamic body with a fixed position on the x-axis with the ability to jump when the right side of the screen is touched and will dodge for as long the left side of the screen is touched.
 
 First, let's build our function inside `WorldUtils` that creates the runner:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import ...
@@ -48,11 +49,11 @@ public class WorldUtils {
     }
 
 }
-```
+{% endhighlight %}
 
 And add the following constants:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -68,11 +69,11 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
 
 }
-```
+{% endhighlight %}
 
 How is our runner set up? We created him as a box that is 1 meter wide and 2 meters long. His position will be fixed at 2 meters from the left side of the screen and on top of the ground (duh). Let's make sure that our runner is set up fine by adding him to the `GameStage`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import ...
@@ -99,15 +100,15 @@ public class GameStage extends Stage {
     ...
 
 }
-```
+{% endhighlight %}
 
 Run the game again and you should now see the runner (a box) standing there doing nothing, like the image below:
 
-<img src="{{ page.assets_url }}/box.png" width=480 />
+![]({{ page.assets_url }}/box.png){:width="480"}
 
 Good! Now, before we add the controls to our game, we should make good use of our `GameStage` and use `Actor` classes for our world components (the ground and the runner). In a newly created `actors` package, let's create a base class for our actors called `GameActor`. Let's start with this:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -122,11 +123,11 @@ public abstract class GameActor extends Actor {
     }
 
 }
-```
+{% endhighlight %}
 
 With the base class done, I'll add a `Ground` class for our ground:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -139,11 +140,11 @@ public class Ground extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
 And a `Runner` class for our runner:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -155,11 +156,11 @@ public class Runner extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
 Notice how our constructor is expecting a `Body`. This will make sure each `Actor` is responsible for the physics `Body` it is supposed to render and update. Let's change our `GameStage` so it uses our newly created classes.
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import ...
@@ -201,7 +202,7 @@ public class GameStage extends Stage {
     ...    
 
 }
-```
+{% endhighlight %}
 
 If you run the project at this point, you should still see the last posted image (the static runner on the ground).
 
@@ -209,9 +210,9 @@ The first control we'll add to the runner is jumping. The logic is the following
 
 So, how do I make a body jump? We apply a _linear impulse_ to the body in the y-direction and let box2d do its magic. We'll make use of box2d's _UserData_ to store information needed by our `Body` objects in order to behave properly. We'll also create an `enum` to store the different `UserData` types we have available; this will come in handy when detecting collisions later on.
 
-In an `enums` package, create an enum called `UserDataType`: 
+In an `enums` package, create an enum called `UserDataType`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.enums;
 
 public enum UserDataType {
@@ -220,11 +221,11 @@ public enum UserDataType {
     RUNNER
 
 }
-```
+{% endhighlight %}
 
 In a newly created `box2d` package, create an abstract `UserData` class which will be used by our characters:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import com.gamestudio24.martianrun.enums.UserDataType;
@@ -242,11 +243,11 @@ public abstract class UserData {
     }
 
 }
-```
+{% endhighlight %}
 
 And extend it for our `Ground` and our `Runner`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import com.gamestudio24.martianrun.enums.UserDataType;
@@ -259,11 +260,11 @@ public class GroundUserData extends UserData {
     }
 
 }
-```
+{% endhighlight %}
 
-Our `RunnerUserData` will store the vector to apply to our body when jumping: 
+Our `RunnerUserData` will store the vector to apply to our body when jumping:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import com.badlogic.gdx.math.Vector2;
@@ -289,11 +290,11 @@ public class RunnerUserData extends UserData {
     }
 
 }
-```
+{% endhighlight %}
 
-Here's the new constant I added. Even though it may look like a random value, I actually did a bit of trial and error until the controls felt right. I'm also adding a gravity scale which I'll set in a bit because I want the runner to fall faster so the game has an arcade feel: 
+Here's the new constant I added. Even though it may look like a random value, I actually did a bit of trial and error until the controls felt right. I'm also adding a gravity scale which I'll set in a bit because I want the runner to fall faster so the game has an arcade feel:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -306,11 +307,11 @@ public class Constants {
     public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
 
 }
-```
+{% endhighlight %}
 
-Even though I pointed out that `GroundUserData` is pointless, it is important to be consistent with the `UserData` your `Body` objects use to prevent unexpected behavior. We will store an instance of `UserData` in all our `Actor` objects so let's prepare our `GameActor` class for it: 
+Even though I pointed out that `GroundUserData` is pointless, it is important to be consistent with the `UserData` your `Body` objects use to prevent unexpected behavior. We will store an instance of `UserData` in all our `Actor` objects so let's prepare our `GameActor` class for it:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -330,11 +331,11 @@ public abstract class GameActor extends Actor {
     public abstract UserData getUserData();
 
 }
-```
+{% endhighlight %}
 
-I need to override the new `getUserData()` function in our `Ground` class: 
+I need to override the new `getUserData()` function in our `Ground` class:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -351,11 +352,11 @@ public class Ground extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
-Now we have all we need to make our character jump. We'll do it with a `jump()` function in our `Runner` class. We'll also add a `landed()` function to notify the runner he can jump again: 
+Now we have all we need to make our character jump. We'll do it with a `jump()` function in our `Runner` class. We'll also add a `landed()` function to notify the runner he can jump again:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -388,11 +389,11 @@ public class Runner extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
-Pretty straightforward, but we need two more things: set the appropriate `UserData` when setting up our `World` and implementing the controls on the `GameStage` to actually make the character jump. Setting the `UserData` is easy, you just need to add a couple of lines in our `WorldUtils` class. I'm also going to add a gravity scale (already added in the `Constants` class) to the runner so he falls faster: 
+Pretty straightforward, but we need two more things: set the appropriate `UserData` when setting up our `World` and implementing the controls on the `GameStage` to actually make the character jump. Setting the `UserData` is easy, you just need to add a couple of lines in our `WorldUtils` class. I'm also going to add a gravity scale (already added in the `Constants` class) to the runner so he falls faster:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import ...
@@ -424,11 +425,11 @@ public class WorldUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-To implement the controls in our `GameStage`, we must override the `touchDown` function, determine if the right side of the screen is touched and, if so, make the runner `jump()`: 
+To implement the controls in our `GameStage`, we must override the `touchDown` function, determine if the right side of the screen is touched and, if so, make the runner `jump()`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import com.badlogic.gdx.Gdx;
@@ -502,11 +503,11 @@ public class GameStage extends Stage {
     }
 
 }
-```
+{% endhighlight %}
 
-The controls are almost done, we need one last thing. We want to know when the runner lands on the ground so we are able to jump again. The way we'll do this is by detecting a collision between the `Runner` and the `Ground` and notifying the `Runner` that he's `landed()`. There's a box2d listener for detecting collision between two bodies called `ContactListener` which we'll implement. First, I'll create a `BodyUtils` class inside the `utils` package with a couple of helper functions: 
+The controls are almost done, we need one last thing. We want to know when the runner lands on the ground so we are able to jump again. The way we'll do this is by detecting a collision between the `Runner` and the `Ground` and notifying the `Runner` that he's `landed()`. There's a box2d listener for detecting collision between two bodies called `ContactListener` which we'll implement. First, I'll create a `BodyUtils` class inside the `utils` package with a couple of helper functions:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -528,11 +529,11 @@ public class BodyUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-And now implement the `ContactListener` in the `GameStage` class: 
+And now implement the `ContactListener` in the `GameStage` class:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import ...
@@ -585,7 +586,7 @@ public class GameStage extends Stage implements ContactListener {
 
     }
 }
-```
+{% endhighlight %}
 
 We've added a lot of stuff and it's finally ready to run! Run the game and you'll see that when you click/touch the right side of the screen the runner will jump just like is shown in the following video:
 
@@ -593,7 +594,7 @@ We've added a lot of stuff and it's finally ready to run! Run the game and you'l
 
 Our next step is to make the runner dodge. Now that we've got our blueprint for implementing the runner's moves it will be much easier to make him dodge. The logic is the following: if the runner is not jumping and we touch the left side of the screen, he will be sliding until we stop touching the left side of the screen. By sliding, we mean rotating our rectangle by -90 degrees and placing it just above the ground. We already know the position of the runner when running; it's in our `Constants` class. Now we also need to make note of the position of the runner while sliding by also adding it in the `Constants` class:
 
-```java
+{% highlight java %}
 public class Constants {
 
     ...
@@ -604,11 +605,11 @@ public class Constants {
     public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
 
 }
-```
+{% endhighlight %}
 
-And store this info in our `RunnerUserData` class: 
+And store this info in our `RunnerUserData` class:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import ...
@@ -646,11 +647,11 @@ public class RunnerUserData extends UserData {
         return dodgePosition;
     }
 }
-```
+{% endhighlight %}
 
-In our `Runner` class, we'll add the functions to `dodge()` and `stopDodge()`. We also have to modify our `jump()` function so it does not make the runner jump while dodging: 
+In our `Runner` class, we'll add the functions to `dodge()` and `stopDodge()`. We also have to modify our `jump()` function so it does not make the runner jump while dodging:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import ...
@@ -692,11 +693,11 @@ public class Runner extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
-Great! Now we need to call these functions from our `GameStage` class. When the user touches the left side of the screen we'll call `dodge()` and whenever we stop touching the screen we'll call `stopDodge()` if the runner `isDodging()`. It's easy to know when we stop touching the screen, we just need to override the `touchUp()` function: 
+Great! Now we need to call these functions from our `GameStage` class. When the user touches the left side of the screen we'll call `dodge()` and whenever we stop touching the screen we'll call `stopDodge()` if the runner `isDodging()`. It's easy to know when we stop touching the screen, we just need to override the `touchUp()` function:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import ...
@@ -752,7 +753,7 @@ public class GameStage extends Stage implements ContactListener {
 
     ...
 }
-```
+{% endhighlight %}
 
 Our dodging functionality is done! Run the game and go ahead and touch and hold the left side of the screen; you should now be able to dodge. The jump functionality stays the same.  
 The video shows how the game is working at this point:  
@@ -761,6 +762,6 @@ The video shows how the game is working at this point:
 
 Very nice, isn't it? So, what about the running part? We will keep our runner fixed at this position and make the objects move towards him, the animations will give the illusion of the runner moving forward. This means we are done with our runner's controls!
 
-In the [next part](/a-running-game-with-libgdx-part-3), we will be adding our enemies to the game. 
+In the [next part](/a-running-game-with-libgdx-part-3), we will be adding our enemies to the game.
 
 If you have any questions or comments on what we have done so far, feel free to let me know in the comments section. Cheers!

@@ -1,21 +1,21 @@
---- 
+---
 title: Installing Oracle Application Server 10g on Windows Server 2003 SP2
 date: "2010-08-22T16:17:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - Oracle 10g
 - OAS 10g
 - ADFBCManager
 - Windows Server 2003 SP2
 - JVM
 - Java Virtual Machine
-redirect_from: 
+redirect_from:
 - /2010/08/installing-oracle-application-server.html
 ---
 
 If you try to install the Oracle Application Server 10g (9.0.4) on a Windows Server 2003 SP2, you may encounter an error when the installer tries to configure the OC4J instances with the following:
 
-```bash
+{% highlight bash %}
 Deploying application 'ADFBCManager' to OC4J instance 'home'.
 FAILED!
 ERROR: Caught exception while deploying 'ADFBCManager' to 'home':
@@ -35,7 +35,7 @@ at com.evermind.client.orion.DeployCommand.execute(DeployCommand.java:90)
 at com.evermind.client.orion.Oc4jAdminConsole.executeCommand(Oc4jAdminConsole.java:139)
 ... 8 more
 ...
-```
+{% endhighlight %}
 <!--more-->
 
 The reason for this is because one of Microsoft's security updates (MS09-012 or KB956572). When the patch is installed, it prevents any JAVA Virtual Machine to run properly.

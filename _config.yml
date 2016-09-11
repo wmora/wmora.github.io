@@ -7,11 +7,11 @@ url: "http://williammora.com"
 twitter_username: _williammora
 github_username: wmora
 disqus_username: williammora
-isso_domain: 
+isso_domain:
 ga_tracking_id: UA-39417110-1
 
 # Build settings
-markdown: redcarpet
+highlighter: pygments
 source: .
 permalink: /:title
 

@@ -1,8 +1,8 @@
---- 
+---
 title: LibGDX Tutorial - A Running Game with libGDX - Part 3
 date: "2014-06-07T10:03:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - Java
 - box2d
 - software development
@@ -11,7 +11,7 @@ tags:
 - video games
 - enums
 - Android
-redirect_from: 
+redirect_from:
 - /2014/06/a-running-game-with-libgdx-part-3.html
 ---
 
@@ -21,6 +21,7 @@ Check out [part 2](/a-running-game-with-libgdx-part-2) for implementing controls
 This is part 3 of a tutorial on writing a 2d running game. Remember the code is on [GitHub](https://github.com/wmora/martianrun). Also, a final version based on this tutorial is on [Google Play](https://play.google.com/store/apps/details?id=com.gamestudio24.cityescape.android).
 
 <!--more-->
+
 ## Watch Out for the Enemies!
 In this section we'll introduce our enemies, a bunch of running/flying insects. They will all be coming towards our runner in an attempt to hit/stop him. We will have 6 types of enemies: 4 of them will be running so we'll have to jump over them and the other 2 will be flying, so we'll have to dodge them. This is the configuration (width x height in meters) I came up with for all enemies:
 
@@ -35,7 +36,7 @@ The logic for our enemies will be the following: we'll place an enemy just outsi
 
 Since we want to generate different types of enemies, we'll store their configuration as an `enum`. In our `enums` package, create an enum called `EnemyType` with the following:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.enums;
 
 import com.gamestudio24.martianrun.utils.Constants;
@@ -84,11 +85,11 @@ public enum EnemyType {
     }
 
 }
-```
+{% endhighlight %}
 
-The new `Constants` added: 
+The new `Constants` added:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -105,11 +106,11 @@ public class Constants {
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
 
 }
-```
+{% endhighlight %}
 
-To obtain a random value from an `enum`, I created a `RandomUtils` class inside our `utils` package that contains a `private static RandomEnum` class that returns a random value from a given `enum` (credits go to [this SO question](http://stackoverflow.com/a/1973018)): 
+To obtain a random value from an `enum`, I created a `RandomUtils` class inside our `utils` package that contains a `private static RandomEnum` class that returns a random value from a given `enum` (credits go to [this SO question](http://stackoverflow.com/a/1973018)):
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.gamestudio24.martianrun.enums.EnemyType;
@@ -143,11 +144,11 @@ public class RandomUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-Since we want to be consistent with our project setup, we have to create an `EnemyUserData` which extends from our `UserData` as well as an `Enemy` which extends from our `GameActor`. Let's add an `ENEMY` value to our `UserDataType` enum: 
+Since we want to be consistent with our project setup, we have to create an `EnemyUserData` which extends from our `UserData` as well as an `Enemy` which extends from our `GameActor`. Let's add an `ENEMY` value to our `UserDataType` enum:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.enums;
 
 public enum UserDataType {
@@ -157,13 +158,13 @@ public enum UserDataType {
     ENEMY
 
 }
-```
+{% endhighlight %}
 
-Hey! What was that `ENEMY_LINEAR_VELOCITY` we added to our `Constants`? Well, remember we are using our custom `UserData` to store any info regarding our characters' movement. Our enemies will always run with a constant _linear velocity_ to the left (negative x-direction) and a `EnemyUserData` class in our `box2d` package will be the perfect place to store it. 
+Hey! What was that `ENEMY_LINEAR_VELOCITY` we added to our `Constants`? Well, remember we are using our custom `UserData` to store any info regarding our characters' movement. Our enemies will always run with a constant _linear velocity_ to the left (negative x-direction) and a `EnemyUserData` class in our `box2d` package will be the perfect place to store it.
 
-Before creating or `EnemyUserData` class, I'd like to change something in our `UserData` class: when we check if a character is in bounds (we'll add that in a little bit), I need the character's `width` in order to calculate  it. I want to store this info whenever we create a new `UserData` object: 
+Before creating or `EnemyUserData` class, I'd like to change something in our `UserData` class: when we check if a character is in bounds (we'll add that in a little bit), I need the character's `width` in order to calculate  it. I want to store this info whenever we create a new `UserData` object:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import com.gamestudio24.martianrun.enums.UserDataType;
@@ -202,11 +203,11 @@ public abstract class UserData {
     }
 
 }
-```
+{% endhighlight %}
 
-Let's match this new constructor in our `RunnerUserData`: 
+Let's match this new constructor in our `RunnerUserData`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import ...
@@ -224,11 +225,11 @@ public class RunnerUserData extends UserData {
     ...
 
 }
-```
+{% endhighlight %}
 
-And now we can create our `EnemyUserData`: 
+And now we can create our `EnemyUserData`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import com.badlogic.gdx.math.Vector2;
@@ -254,11 +255,11 @@ public class EnemyUserData extends UserData {
     }
 
 }
-```
+{% endhighlight %}
 
-Let's now add our `Enemy` class that extends from our `GameActor`. Like it's mentioned before, the logic for an enemy is to constantly move in the -x direction: 
+Let's now add our `Enemy` class that extends from our `GameActor`. Like it's mentioned before, the logic for an enemy is to constantly move in the -x direction:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -282,11 +283,11 @@ public class Enemy extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
-We'll add a `createEnemy` function using our `WorldUtils` to create an `Enemy` of a random `EnemyType`. Note that in our `World`, an enemy will be a `KinematicBody`, which means it will move but it won't be affected if it's hit by another object (the `Runner`). While we are at it, we also have to change a line in our `createRunner` function so we store the `Runner width` and `height`: 
+We'll add a `createEnemy` function using our `WorldUtils` to create an `Enemy` of a random `EnemyType`. Note that in our `World`, an enemy will be a `KinematicBody`, which means it will move but it won't be affected if it's hit by another object (the `Runner`). While we are at it, we also have to change a line in our `createRunner` function so we store the `Runner width` and `height`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import ...
@@ -323,13 +324,13 @@ public class WorldUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-Now, we will add the following logic to our `GameStage`: when the game is running, check if there are any enemies on screen; if there aren't any create a new one. Also, when we check if our enemies are out of bounds, we also want to check if our runner is out of bounds to destroy its `Body`. If an `Enemy` hits our `Runner`, we'll apply an _angular impulse_ to our `Runner` so the hit looks a bit cartoonish. 
+Now, we will add the following logic to our `GameStage`: when the game is running, check if there are any enemies on screen; if there aren't any create a new one. Also, when we check if our enemies are out of bounds, we also want to check if our runner is out of bounds to destroy its `Body`. If an `Enemy` hits our `Runner`, we'll apply an _angular impulse_ to our `Runner` so the hit looks a bit cartoonish.
 
-Let's store the _angular impulse_ we just mentioned in our `Constants`: 
+Let's store the _angular impulse_ we just mentioned in our `Constants`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -343,11 +344,11 @@ public class Constants {
     ...
 
 }
-```
+{% endhighlight %}
 
-And access it through our `RunnerUserData` object: 
+And access it through our `RunnerUserData` object:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.box2d;
 
 import ...
@@ -361,11 +362,11 @@ public class RunnerUserData extends UserData {
     }
 
 }
-```
+{% endhighlight %}
 
-Our `Runner` now needs to apply this _angular impulse_ whenever he's `hit()`: 
+Our `Runner` now needs to apply this _angular impulse_ whenever he's `hit()`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.actors;
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -402,7 +403,7 @@ public class Runner extends GameActor {
         // If the runner is hit don't force him back to the running position
         if (!hit) {
             body.setTransform(getUserData().getRunningPosition(), 0f);    
-        } 
+        }
     }
 
     public boolean isDodging() {
@@ -419,11 +420,11 @@ public class Runner extends GameActor {
     }
 
 }
-```
+{% endhighlight %}
 
-Now, add a couple of helper functions in our `BodyUtils` class: `bodyIsEnemy` checks whether the given `Body` belongs to an `Enemy` and `bodyInBounds` checks whether the `Runner` or an `Enemy` is in our screen boundaries: 
+Now, add a couple of helper functions in our `BodyUtils` class: `bodyIsEnemy` checks whether the given `Body` belongs to an `Enemy` and `bodyInBounds` checks whether the `Runner` or an `Enemy` is in our screen boundaries:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import ...
@@ -451,11 +452,11 @@ public class BodyUtils {
     ...
 
 }
-```
+{% endhighlight %}
 
-Hook it all up in the `GameStage`: 
+Hook it all up in the `GameStage`:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import ...
@@ -538,12 +539,12 @@ public class GameStage extends Stage implements ContactListener {
     ...
 
 }
-```
+{% endhighlight %}
 
-And we've got ourselves a game! Run the game and you'll get "enemies" of different types moving towards the runner. You have to jump or dodge to avoid getting hit by any of them. The following video shows the game at this point (ignore the title, the original game name was modified before the first release): 
+And we've got ourselves a game! Run the game and you'll get "enemies" of different types moving towards the runner. You have to jump or dodge to avoid getting hit by any of them. The following video shows the game at this point (ignore the title, the original game name was modified before the first release):
 
 <iframe width="320" height="266" src="http://www.youtube.com/embed/X-jEZHDN-gw" frameborder="0" allowfullscreen></iframe>
 
-At this point, I think enough has been covered to understand the basics of implementing a running game. In the next parts of this guide I will add some more stuff to make the game a little more fun, but I recommend you take it from here and customize it as you wish. 
-[Click here](/a-running-game-with-libgdx-part-4) for part 4. 
+At this point, I think enough has been covered to understand the basics of implementing a running game. In the next parts of this guide I will add some more stuff to make the game a little more fun, but I recommend you take it from here and customize it as you wish.
+[Click here](/a-running-game-with-libgdx-part-4) for part 4.
 Feel free to drop any questions or comments in the comments section. Cheers!

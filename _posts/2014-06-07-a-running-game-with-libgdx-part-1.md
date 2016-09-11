@@ -1,15 +1,15 @@
---- 
+---
 title: LibGDX Tutorial - A Running Game with libGDX - Part 1
 date: "2014-06-07T10:02:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - Google Play
 - Java
 - software development
 - libGDX
 - video games
 - Android
-redirect_from: 
+redirect_from:
 - /2014/06/a-running-game-with-libgdx-part-1.html
 assets_url: /assets/libgdx-martianrun-tutorial
 ---
@@ -40,11 +40,11 @@ Let's [set up a new project](https://github.com/libgdx/libgdx/wiki/Setting-up-yo
 
 This is what my setup looks like:
 
-<img src="{{ page.assets_url }}/project_setup.png" width=400 />
+![]({{ page.assets_url }}/project_setup.png){:width="400"}
 
 Once you click on **Generate** the Gradle `clean` task will run and all libraries will be downloaded. You should see an output like the following:
 
-```bash
+{% highlight bash %}
 Generating app in /Users/wilmor24/Downloads/martianrun
 Executing '/Users/wilmor24/Downloads/martianrun/gradlew clean --no-daemon'
 To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: http://gradle.org/docs/2.2/userguide/gradle_daemon.html.
@@ -62,13 +62,13 @@ Done!
 To import in Eclipse: File -> Import -> Gradle -> Gradle Project
 To import to Intellij IDEA: File -> Import -> build.gradle
 To import to NetBeans: File -> Open Project...
-```
+{% endhighlight %}
 
 I won't go over importing the project into an IDE since it's part of a libGDX project setup and it is up to you which IDE to use (in case you are wondering, I'm using IntelliJ IDEA 14 at the time of this writing).
 
 After successfully running the game in both desktop and Android, I usually clean up the boilerplate code set up by libGDX. That means, deleting the image `badlogic.jpg` that is added to the `assets` folder and leaving my game class like the following:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -85,14 +85,14 @@ public class MartianRun extends ApplicationAdapter {
 
     }
 }
-```
+{% endhighlight %}
 
 ## Getting Started
 The first thing we'll do is to make our game class extend `Game` so we can support multiple screens. We won't be using multiple screens for this game but I suggest doing this part in case you want to add multiple screens in the future, e.g. for a splash screen, separate menu screen, leaderboards, etc.
 
 My game class now looks like this:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.Game;
@@ -107,13 +107,13 @@ public class MartianRun extends Game {
     // Get rid of render function, let the parent class handle it
 
 }
-```
+{% endhighlight %}
 
 Now create a `GameScreen` class inside a newly created `screens` package:
 
 _**NOTE: Assume all classes/packages are being added/modified inside our core module unless otherwise noted**_
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.screens;
 
 import com.badlogic.gdx.Screen;
@@ -156,11 +156,11 @@ public class GameScreen implements Screen {
     }
 
 }
-```
+{% endhighlight %}
 
 Once created, we need to make our game class set our `GameScreen` on startup.
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun;
 
 import com.badlogic.gdx.Game;
@@ -174,11 +174,11 @@ public class MartianRun extends Game {
     }
 
 }
-```
+{% endhighlight %}
 
 The last thing we need to do for our setup is to set the height and width of our game. We'll make this game 480x800. Let's store these values in a `Constants` class inside a `utils` package.
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 public class Constants {
@@ -187,11 +187,11 @@ public class Constants {
     public static final int APP_HEIGHT = 480;
 
 }
-```
+{% endhighlight %}
 
 Finally, configure our `DesktopLauncher` so it uses the correct measurements:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -207,7 +207,7 @@ public class DesktopLauncher {
         new LwjglApplication(new MartianRun(), config);
  }
 }
-```
+{% endhighlight %}
 
 Go ahead and run the project. So far, we have set up a game with a screen running on a 480x800 window.
 
@@ -224,7 +224,7 @@ Our bodies will be created as follows:
 
 Let's make a class that takes care of creating our bodies. Create a `WorldUtils` class inside our `utils` package and create a function to set up the ground.
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -251,11 +251,11 @@ public class WorldUtils {
     }
 
 }
-```
+{% endhighlight %}
 
-The new constants added to our `Constants` class are the following: 
+The new constants added to our `Constants` class are the following:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.utils;
 
 import com.badlogic.gdx.math.Vector2;
@@ -269,14 +269,14 @@ public class Constants {
 
     public static final float GROUND_X = 0;
     public static final float GROUND_Y = 0;
-    public static final float GROUND_WIDTH = 50f;
+    public static final float GROUND_WIDTH = 25f;
     public static final float GROUND_HEIGHT = 2f;
     public static final float GROUND_DENSITY = 0f;
 
 }
-```
+{% endhighlight %}
 
-Let's take a look at what we just did. We defined a utility class `WorldUtils` which will take care of creating our world components. For now we'll only create the ground and the world itself. The ground is created as a static body with a length of 25 meters and a height of 2 meters and it is created as a box. In fact, all of our bodies will be boxes of different shapes.
+Let's take a look at what we just did. We defined a utility class `WorldUtils` which will take care of creating our world components. For now we'll only create the ground and the world itself. The ground is created as a static body with a width of 25 meters and a height of 2 meters and it is created as a box. In fact, all of our bodies will be boxes of different shapes.
 
 The world is created with a gravity of -10 m/s^2. Box2d works best when using real physics values. In fact, the documentation warns the engine to be buggy if using exaggerated world values.
 
@@ -284,7 +284,7 @@ Ok, so we have these functions to create a world and the ground, but where do we
 
 Create a `GameStage` inside a `stages` package. This class will extend libGDX's `Stage` class. In the constructor, we'll use our `WorldUtils` class to create the world and the ground. At this point, we will be using the `Box2DDebugRenderer` to display what we have created so far. We'll use sprites later on once we are comfortable with the physics. The code is the following:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.stages;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -345,13 +345,13 @@ public class GameStage extends Stage {
     }
 
 }
-```
+{% endhighlight %}
 
 You probably noticed the _Fixed timestep_ comment inside the `render` function. Like the libGDX box2d documentation says, stepping the simulation is a topic itself. I followed [this](http://gafferongames.com/game-physics/fix-your-timestep/) article to implement my version of fixed timestep. We probably need to implement interpolation as well, but I'll leave it as a _TODO_ for now.
 
 Finally, let's launch our `GameStage` inside our `GameScreen`. We'll be calling `act` and `draw` inside the `render` function:
 
-```java
+{% highlight java %}
 package com.gamestudio24.martianrun.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -381,14 +381,14 @@ public class GameScreen implements Screen {
     ...
 
 }
-```
+{% endhighlight %}
 
 Run the game and you'll see a green line at the bottom which is the outline of the box we added to our world (the ground). Your game should look like the image below:
 
-<img src="{{ page.assets_url }}/world_with_ground.png" width=480 />
+![]({{ page.assets_url }}/world_with_ground.png){:width="480"}
 
 In the [next part](/a-running-game-with-libgdx-part-2), we'll add our runner with some basic controls.
 
-If you have any questions or comments, feel free to let me know in the comments section. 
+If you have any questions or comments, feel free to let me know in the comments section.
 
 Cheers!

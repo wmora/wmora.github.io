@@ -1,16 +1,17 @@
---- 
+---
 title: SpinnerSimpleDateModel
 date: "2011-01-14T02:55:00.000-03:00"
 author: William Mora
-tags: 
-redirect_from: 
+tags:
+redirect_from:
 - /2011/01/spinnersimpledatemodel.html
 ---
 
-Here is the code for a `JSpinnerModel` that handles `Date` objects in simple format (e.g. 'dd/MM/yyyy'). It extends a `SpinnerDateModel` so most of the code is based on that class. This class assumes that values are separated by a slash (/). The reason why I created this was based on a client's requirement where I could only display the date in simple format and select the calendar using a `JSpinner`: 
+Here is the code for a `JSpinnerModel` that handles `Date` objects in simple format (e.g. 'dd/MM/yyyy'). It extends a `SpinnerDateModel` so most of the code is based on that class. This class assumes that values are separated by a slash (/). The reason why I created this was based on a client's requirement where I could only display the date in simple format and select the calendar using a `JSpinner`:
 
 <!--more-->
-```java
+
+{% highlight java %}
 /**
  * A SpinnerSimpleDateModel for sequences of formatted Dates.
  * in simple format(e.g. "dd/MM/yyyy")
@@ -49,7 +50,7 @@ public class SpinnerSimpleDateModel extends SpinnerDateModel {
      *                      Calendar.YEAR - Year
      * @param dateFormat    A format specified by an instance of SimpleDateFormat
      */
-    public SpinnerSimpleDateModel(Date value, Comparable start, Comparable end, 
+    public SpinnerSimpleDateModel(Date value, Comparable start, Comparable end,
 int calendarField, SimpleDateFormat dateFormat) {
         this.dateFormat = dateFormat;
         if (value == null) {
@@ -149,14 +150,14 @@ int calendarField, SimpleDateFormat dateFormat) {
 
     }
 }
-```
+{% endhighlight %}
 
-Now the model can be used for any JSpinner. To create an instance for this class, the following will work:  `SpinnerSimpleDateModel spinnerModel = new SpinnerSimpleDateModel(new Date(), null, null, Calendar.DATE, new SimpleDateFormat("dd/MM/yyyy"));` Then, set the editor of the `JSpinner` object to show the same format specified for the `SpinnerSimpleDateModel` object like the following: 
+Now the model can be used for any JSpinner. To create an instance for this class, the following will work:  `SpinnerSimpleDateModel spinnerModel = new SpinnerSimpleDateModel(new Date(), null, null, Calendar.DATE, new SimpleDateFormat("dd/MM/yyyy"));` Then, set the editor of the `JSpinner` object to show the same format specified for the `SpinnerSimpleDateModel` object like the following:
 
-```java
+{% highlight java %}
 JSpinner spinner1 = new javax.swing.JSpinner();
 spinner1.setModel(spinnerModel);
 spinner1.setEditor(new javax.swing.JSpinner.DateEditor(spinner1, "dd/MM/yyyy"));
-```
+{%endhighlight %}
 
 Hope someone finds this useful. An advantage of using this technique is to manipulate date formats as you wish regardless of the locale.

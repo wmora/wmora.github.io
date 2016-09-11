@@ -1,24 +1,24 @@
---- 
+---
 title: "SQL: Exists Condition"
 date: "2010-05-19T18:34:00.000-03:00"
 author: William Mora
-tags: 
+tags:
 - not exists
 - exists
 - SQL
-redirect_from: 
+redirect_from:
 - /2010/05/sql-exists-condition.html
 ---
 
 The SQL `EXISTS` condition is a boolean function that returns true if the condition is met. The syntax is pretty simple:
 
-```sql
+{% highlight sql %}
 SELECT * FROM TABLE WHERE EXISTS(_subquery_);
-```
+{% endhighlight %}
 
 Alternatively, you can use `NOT EXISTS(_subquery_)`. An example of the function is the following:
 
-```sql
+{% highlight sql %}
 SELECT utc.table_name    
  FROM user_tab_cols utc     
  WHERE utc.column_name='ACCOUNTID'
@@ -27,6 +27,6 @@ SELECT utc.table_name
    WHERE uc.table_name=utc.table_name     
    AND uc.r_constraint_name='SYS_C00229824')     
    ORDER BY utc.table_name;
- ```
+ {% endhighlight %}
 
-The query looks for all the tables that contain the column `ACCOUNTID` and from those tables, only get the ones that don't make reference to the constraint `SYS_C00229824`. 
+The query looks for all the tables that contain the column `ACCOUNTID` and from those tables, only get the ones that don't make reference to the constraint `SYS_C00229824`.
