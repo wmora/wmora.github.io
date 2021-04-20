@@ -11,5 +11,4 @@ You can contact me at:
 * [LinkedIn](https://www.linkedin.com/profile/in/williammora)
 * [Twitter](https://twitter.com/_williammora) 
 * [GitHub](https://github.com/wmora)
-* [Google+](https://plus.google.com/+WilliamMora/posts) 
-* [Mail](mailto:william.r.mora@gmail.com)
+* [Mail](mailto:contact@mor.ac)
