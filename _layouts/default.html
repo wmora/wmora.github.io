@@ -3,7 +3,7 @@ layout: blank
 ---
       <article>
         <header>
-          <h1><a href="{{ page.url | prepend: site.baseur }}">{{ page.title }}</a></h1>
+          <h1><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></h1>
           {% include share-page.html %}
           <p>{% if page.author %} • {% endif %}{% if page.date %}<time>{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | join: ', ' }}{% endif %}</p>
         </header>
@@ -13,11 +13,4 @@ layout: blank
           {% include donate.html %}
           {% include bottom-ad.html %}
         </div>
-        {% if site.isso_domain and page.id %}
-        <section id="isso-thread"></section>
-        {% endif %}
-        {% if site.disqus_username  and page.id %}
-        <div id="disqus_thread"></div>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        {% endif %}
       </article>
