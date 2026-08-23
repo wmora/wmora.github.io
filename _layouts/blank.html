@@ -1,45 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="{{ site.encoding }}">
     {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
     <title>{% if page.title %} {{ page.title }} › {% endif %}{{ site.title }}</title>
-    <link rel="canonical" href="{{ page.url | prepend: site.url }}">
-    <link rel="stylesheet" type="text/css" href="{{ "/basic.css" | prepend: site.baseurl }}">
-    <link rel="stylesheet" type="text/css" href="{{ "/contrast.css" | prepend: site.baseurl }}">
-    <link rel="stylesheet" type="text/css" href="{{ "/highlight.css" | prepend: site.baseurl }}">
-    <link href="http://www.williammora.com/favicon.ico" rel="icon" type="image/x-icon">
-    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Gentium+Basic:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} &raquo; Feed" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ "/basic.css" | relative_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ "/contrast.css" | relative_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ "/highlight.css" | relative_url }}">
+    <link href="{{ "/favicon.ico" | relative_url }}" rel="icon" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Gentium+Basic:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} &raquo; Feed" href="{{ "/feed.xml" | relative_url }}">
     <script src="https://kit.fontawesome.com/0d5147a6f9.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
+      <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
       {% include icons.html %}
       <nav>
         <ul>
-          <li><a href="{{ site.url }}">Home</a></li>{% for node in site.pages %}{% if node.title %}<li><a href="{{ node.url | prepend: site.baseurl }}"{% if page.url == node.url %} id="selected"{% endif %}>{{ node.title }}</a></li>{% endif %}{% endfor %}
+          <li><a href="{{ "/" | relative_url }}">Home</a></li>{% for node in site.pages %}{% if node.title %}<li><a href="{{ node.url | relative_url }}"{% if page.url == node.url %} id="selected"{% endif %}>{{ node.title }}</a></li>{% endif %}{% endfor %}
         </ul>
       </nav>
     </header>
       {{ content }}
     <footer>
-      <span>Copyright</span><span><a href="{{ site.url }}">{% if page.author %}{{ page.author }}{% else %}{{site.title}}{% endif %}</a></span><span>{{ site.time | date: "%Y" }}</span>
+      {% assign current_year = site.time | date: "%Y" %}
+      <span>&copy;</span>
+      <span><a href="{{ "/" | relative_url }}">{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}</a></span>
+      <span>{% if site.copyright_start_year and site.copyright_start_year != current_year %}{{ site.copyright_start_year }}-{{ current_year }}{% else %}{{ current_year }}{% endif %}</span>
     </footer>
-    {% if site.ga_tracking_id %}
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', '{{ site.ga_tracking_id }}', 'auto');
-      ga('send', 'pageview');
-    </script>
-    {% endif %}
   </body>
 </html>

@@ -3,12 +3,12 @@ title: William Mora
 email: william.r.mora@gmail.com
 description: "Software development (mostly). Random tech, tips, thoughts, etc."
 baseurl: ""
-url: "http://williammora.com"
+url: "https://williammora.com"
+domain: "williammora.com"
 twitter_username: _williammora
 github_username: wmora
-disqus_username: williammora
 isso_domain:
-ga_tracking_id: UA-39417110-1
+copyright_start_year: 2010
 
 # Build settings
 source: .
@@ -26,5 +26,5 @@ defaults:
       display_ad: true
       display_donate: false
 
-gems:
+plugins:
   - jekyll-redirect-from

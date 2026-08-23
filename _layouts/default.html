@@ -3,11 +3,19 @@ layout: blank
 ---
       <article>
         <header>
-          <h1><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></h1>
+          <h1><a href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
           {% include share-page.html %}
           <p>{% if page.author %} • {% endif %}{% if page.date %}<time>{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | join: ', ' }}{% endif %}</p>
         </header>
         <div>
+          {% if page.date %}
+          {% assign current_year = site.time | date: "%Y" | plus: 0 %}
+          {% assign published_year = page.date | date: "%Y" | plus: 0 %}
+          {% assign years_old = current_year | minus: published_year %}
+          {% if years_old >= 3 %}
+          <p class="post-note">Archived note: this post was published in {{ published_year }}. Commands, screenshots, and third-party integrations may no longer match current tools.</p>
+          {% endif %}
+          {% endif %}
           {{ content }}
           {% include share-page.html %}
           {% include donate.html %}

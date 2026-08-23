@@ -276,9 +276,8 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
-  github-pages
-  jekyll-redirect-from
-  json (~> 2.7.4)
+  github-pages (~> 232)
+  jekyll-redirect-from (~> 0.16.0)
 
 BUNDLED WITH
    2.5.16

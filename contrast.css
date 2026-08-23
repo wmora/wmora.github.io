@@ -20,6 +20,16 @@ body > *:nth-child(odd) div a {
     color: #fc5;
 }
 
+body > *:nth-child(odd) .post-note {
+    border-left-color: #fc5;
+    background: rgba(255, 204, 85, .08);
+}
+
+body > *:nth-child(odd) .share-page,
+body > *:nth-child(odd) .share-page a {
+    color: #fc5;
+}
+
 .share-page {
     text-align: center;
     color: #222;
