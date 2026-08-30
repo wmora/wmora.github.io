@@ -16,9 +16,14 @@ if [ -n "$outside" ]; then
   exit 1
 fi
 
-files=$(printf '%s\n' "$changed" | cut -c4-)
-if [ -d _posts ]; then git add -- _posts; fi
-if [ -d _drafts ]; then git add -- _drafts; fi
+files=$(printf '%s\n' "$changed" | cut -c4- | grep -E '^_posts/' || true)
+
+if [ -z "$files" ]; then
+  echo "bin/publish: only _drafts/ changes found; drafts are not part of the published site" >&2
+  exit 1
+fi
+
+git add -- _posts
 
 count=$(printf '%s\n' "$files" | wc -l | tr -d ' ')
 if [ "$count" -eq 1 ]; then

@@ -27,6 +27,7 @@ for arg in "$@"; do
 done
 
 [ -n "$title" ] || usage
+[ "$draft" -eq 1 ] && [ "$publish" -eq 1 ] && { echo "bin/post: --draft and --publish cannot be combined; drafts are not part of the published site" >&2; exit 1; }
 
 slug=$(printf '%s' "$title" | LC_ALL=C tr '[:upper:]' '[:lower:]' | LC_ALL=C sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
 [ -n "$slug" ] || { echo "bin/post: title produced an empty slug" >&2; exit 1; }

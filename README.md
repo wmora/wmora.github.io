@@ -2,7 +2,7 @@ Personal website for [https://williammora.com](https://williammora.com), powered
 
 ## Posting
 
-- Write: `bin/post "Title of the post"` (add `--draft` to start in `_drafts/`; `bin/publish` picks up a post started another way, as long as the only changes are under `_posts/` or `_drafts/`).
+- Write: `bin/post "Title of the post"` (add `--draft` to start in `_drafts/`; move it into `_posts/` when it's ready to go live — `_drafts/` is never part of the built site). `bin/publish` picks up a post already in `_posts/` that was started another way, as long as the working tree has no other unrelated changes.
 - Preview: `mise exec -- bundle exec jekyll serve --drafts`
 - Publish: `bin/post ... --publish`, or `bin/publish` for a post already written
 
