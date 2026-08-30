@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+changed=$(git status --porcelain)
+
+if [ -z "$changed" ]; then
+  echo "bin/publish: nothing to publish" >&2
+  exit 1
+fi
+
+outside=$(printf '%s\n' "$changed" | cut -c4- | grep -Ev '^(_posts|_drafts)/' || true)
+
+if [ -n "$outside" ]; then
+  echo "bin/publish: refusing, unrelated changes outside _posts/ and _drafts/:" >&2
+  printf '%s\n' "$outside" >&2
+  exit 1
+fi
+
+files=$(printf '%s\n' "$changed" | cut -c4-)
+if [ -d _posts ]; then git add -- _posts; fi
+if [ -d _drafts ]; then git add -- _drafts; fi
+
+count=$(printf '%s\n' "$files" | wc -l | tr -d ' ')
+if [ "$count" -eq 1 ]; then
+  message="Post: $(basename "$files" .md)"
+else
+  message="Post: $count posts"
+fi
+
+git commit -m "$message"
+git push origin master

@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "usage: bin/post \"Title of the post\" [--no-edit] [--publish] [--draft]" >&2
+  exit 1
+}
+
+title=""
+no_edit=0
+publish=0
+draft=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --no-edit) no_edit=1 ;;
+    --publish) publish=1 ;;
+    --draft) draft=1 ;;
+    -*) usage ;;
+    *)
+      if [ -n "$title" ]; then
+        usage
+      fi
+      title="$arg"
+      ;;
+  esac
+done
+
+[ -n "$title" ] || usage
+
+slug=$(printf '%s' "$title" | LC_ALL=C tr '[:upper:]' '[:lower:]' | LC_ALL=C sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+[ -n "$slug" ] || { echo "bin/post: title produced an empty slug" >&2; exit 1; }
+
+post_date=$(date +%Y-%m-%d)
+
+if [ "$draft" -eq 1 ]; then
+  target_dir="_drafts"
+  target="$target_dir/$slug.md"
+else
+  target_dir="_posts"
+  target="$target_dir/$post_date-$slug.md"
+fi
+
+[ -e "$target" ] && { echo "bin/post: $target already exists" >&2; exit 1; }
+
+mkdir -p "$target_dir"
+cat > "$target" <<EOF
+---
+title: "$title"
+date: $post_date
+---
+
+EOF
+
+if [ "$no_edit" -eq 0 ]; then
+  "${EDITOR:-vi}" "$target"
+fi
+
+if [ "$publish" -eq 1 ]; then
+  git add "$target"
+  git commit -m "Post: $title"
+  git push origin master
+fi
+
+echo "$target"
