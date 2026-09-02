@@ -7,8 +7,8 @@ I’m William Mora, a software developer who enjoys building products and writin
 
 You can reach me here:
 
-- [LinkedIn](https://www.linkedin.com/in/williammora)
-- [Twitter / X](https://twitter.com/_williammora)
-- [GitHub](https://github.com/wmora)
-- [Goodreads](https://www.goodreads.com/user/show/39044140)
 - [Email](mailto:{{ site.email }})
+- [LinkedIn](https://www.linkedin.com/in/williammora)
+- [GitHub](https://github.com/wmora)
+- [Twitter / X](https://twitter.com/_williammora)
+- [Goodreads](https://www.goodreads.com/user/show/39044140)
