@@ -1,0 +1,14 @@
+{% assign alphabet = "abcdefghijklmnopqrstuvwxyz" %}
+{% assign tag_name = include.post.tags.first | downcase %}
+{% assign tag_initial = tag_name | slice: 0 %}
+{% assign tag_index = alphabet | split: tag_initial | first | size | modulo: 4 %}
+{% assign tag_classes = "tag-a tag-b tag-c tag-d" | split: " " %}
+<a class="note" href="{{ include.post.url | relative_url }}">
+  <span class="note-date"><span class="paper-only">{{ include.post.date | date: "%b %-d, %Y" }}</span><span class="terminal-only">{{ include.post.date | date: "%Y-%m-%d" }}</span></span>
+  {% if include.post.tags.size > 0 %}<span class="note-tag {{ tag_classes[tag_index] }}">{{ tag_name }}</span>{% else %}<span></span>{% endif %}
+  <div class="note-body">
+    <h3 class="note-title">{{ include.post.title }}</h3>
+    <p class="note-excerpt">{{ include.post.excerpt | strip_html | normalize_whitespace | truncate: 160 }}</p>
+    <span class="note-more">Read the note &rarr;</span>
+  </div>
+</a>

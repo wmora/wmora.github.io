@@ -1,6 +1,6 @@
 /* http://richleland.github.io/pygments-css/ */
 
-.highlight { color: white; background-color: #333 }
+.highlight { background: none; color: var(--code-ink) }
 .highlight .c { color: #75715e }
 .highlight .err { color: #960050; background-color: #1e0010 }
 .highlight .k { color: #66d9ef }
@@ -63,3 +63,42 @@
 .highlight .gu { color: #75715e; }
 .highlight .gd { color: #f92672; }
 .highlight .gi { color: #a6e22e; }
+
+[data-theme="terminal"] .highlight .c,
+[data-theme="terminal"] .highlight .cm,
+[data-theme="terminal"] .highlight .cp,
+[data-theme="terminal"] .highlight .c1,
+[data-theme="terminal"] .highlight .cs { color: #6a7a6e }
+[data-theme="terminal"] .highlight .k,
+[data-theme="terminal"] .highlight .kc,
+[data-theme="terminal"] .highlight .kd,
+[data-theme="terminal"] .highlight .kp,
+[data-theme="terminal"] .highlight .kr,
+[data-theme="terminal"] .highlight .kt { color: #9fd0ff }
+[data-theme="terminal"] .highlight .s,
+[data-theme="terminal"] .highlight .s1,
+[data-theme="terminal"] .highlight .s2,
+[data-theme="terminal"] .highlight .sb,
+[data-theme="terminal"] .highlight .sc,
+[data-theme="terminal"] .highlight .sd,
+[data-theme="terminal"] .highlight .sh,
+[data-theme="terminal"] .highlight .si,
+[data-theme="terminal"] .highlight .sx,
+[data-theme="terminal"] .highlight .sr,
+[data-theme="terminal"] .highlight .ss,
+[data-theme="terminal"] .highlight .ld { color: #f2c14e }
+[data-theme="terminal"] .highlight .n,
+[data-theme="terminal"] .highlight .p,
+[data-theme="terminal"] .highlight .nb,
+[data-theme="terminal"] .highlight .nv,
+[data-theme="terminal"] .highlight .w { color: #cfd8c9 }
+[data-theme="terminal"] .highlight .na,
+[data-theme="terminal"] .highlight .nc,
+[data-theme="terminal"] .highlight .nd,
+[data-theme="terminal"] .highlight .ne,
+[data-theme="terminal"] .highlight .nf,
+[data-theme="terminal"] .highlight .nx { color: #7CFF9B }
+[data-theme="terminal"] .highlight .o,
+[data-theme="terminal"] .highlight .ow,
+[data-theme="terminal"] .highlight .kn,
+[data-theme="terminal"] .highlight .nt { color: #e8f0e4 }

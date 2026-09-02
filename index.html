@@ -1,20 +1,19 @@
 ---
 layout: blank
 ---
-      <section class="site-intro">
-        <p>This site collects notes on software development, Android, JavaScript, and game development. Older entries are preserved as published and may reference outdated tools, APIs, or screenshots.</p>
+      <section class="hero">
+        <div class="hero-eyebrow"><span class="paper-only">williammora.com</span><span class="terminal-only">$ cat MOTD</span></div>
+        <h1 class="hero-title">Hi, I'm Will.<br>I build things<br>and write it down.<span class="cursor"></span></h1>
+        <p class="hero-lede">{{ site.description }} Notes on Android, JavaScript, and game development, kept online as originally published.</p>
+        {% include contact-links.html %}
       </section>
-      {% for page in site.posts %}
-      <article>
-        <header>
-          <h1><a href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
-          <p>• {% if page.date %}<time>{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | join: ', ' }}{% endif %}</p>
-        </header>
-        <div>
-          {{ page.excerpt }}
-        </div>
-        <footer>
-          <a href="{{ page.url | relative_url }}">read more</a>
-        </footer>
-      </article>
-      {% endfor %}
+      <div class="notes-head">
+        <h2><span class="paper-only">Latest notes</span><span class="terminal-only">$ ls -lt notes/</span></h2>
+        <div class="notes-rule"></div>
+        <a class="button" href="{{ "/feed.xml" | relative_url }}">RSS feed</a>
+      </div>
+      <section class="notes">
+        <div class="notes-columns"><span>date</span><span>tag</span><span>title</span></div>
+        {% for post in site.posts %}{% include note-card.html post=post %}{% endfor %}
+      </section>
+      {% include archive-notice.html text="Archive notice. Most of these posts are from 2010 to 2015 and are kept exactly as published. Commands, screenshots, and third-party integrations may no longer match current tools." %}

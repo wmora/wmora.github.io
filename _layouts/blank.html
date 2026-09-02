@@ -1,37 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="paper">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="{{ site.encoding }}">
     {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
     <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
     <title>{% if page.title %} {{ page.title }} › {% endif %}{{ site.title }}</title>
+    <script>(function(){try{var t=localStorage.getItem("theme");if(t==="terminal"||t==="paper"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
     <link rel="canonical" href="{{ page.url | absolute_url }}">
-    <link rel="stylesheet" type="text/css" href="{{ "/basic.css" | relative_url }}">
-    <link rel="stylesheet" type="text/css" href="{{ "/contrast.css" | relative_url }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+    <link rel="stylesheet" type="text/css" href="{{ "/theme.css" | relative_url }}">
     <link rel="stylesheet" type="text/css" href="{{ "/highlight.css" | relative_url }}">
     <link href="{{ "/favicon.ico" | relative_url }}" rel="icon" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Gentium+Basic:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }} &raquo; Feed" href="{{ "/feed.xml" | relative_url }}">
-    <script src="https://kit.fontawesome.com/0d5147a6f9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <header>
-      <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
-      {% include icons.html %}
-      <nav>
-        <ul>
-          <li><a href="{{ "/" | relative_url }}">Home</a></li>{% for node in site.pages %}{% if node.title %}<li><a href="{{ node.url | relative_url }}"{% if page.url == node.url %} id="selected"{% endif %}>{{ node.title }}</a></li>{% endif %}{% endfor %}
-        </ul>
-      </nav>
+    <div class="screen-overlay"></div>
+    <div class="screen-overlay screen-vignette"></div>
+    <header class="site-header">
+      <div>
+        <span class="shell-prompt" aria-hidden="true"><span class="shell-user">will@williammora.com</span>:<span class="shell-path">~</span>$</span>
+        <a class="wordmark" href="{{ "/" | relative_url }}"><span class="paper-only">{{ site.title }}</span><span class="terminal-only">{{ site.title | slugify }}</span></a>
+      </div>
+      <div class="header-tools">
+        <nav class="site-nav">
+          <a href="{{ "/" | relative_url }}"{% if page.url == "/" %} class="current"{% endif %}>Home</a>
+{% for node in site.pages %}{% if node.title %}<a href="{{ node.url | relative_url }}"{% if page.url == node.url %} class="current"{% endif %}>{{ node.title }}</a>{% endif %}{% endfor %}
+        </nav>
+        {% include contact-links.html %}
+        <button class="theme-switch" type="button" id="theme-switch" aria-label="Switch theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>
+          <span class="theme-prefix">theme:&nbsp;</span><span id="theme-switch-label">paper</span>
+        </button>
+      </div>
     </header>
-      {{ content }}
-    <footer>
+    {{ content }}
+    <footer class="site-footer">
       {% assign current_year = site.time | date: "%Y" %}
-      <span>&copy;</span>
-      <span><a href="{{ "/" | relative_url }}">{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}</a></span>
-      <span>{% if site.copyright_start_year and site.copyright_start_year != current_year %}{{ site.copyright_start_year }}-{{ current_year }}{% else %}{{ current_year }}{% endif %}</span>
+      <span>&copy; {% if site.copyright_start_year and site.copyright_start_year != current_year %}{{ site.copyright_start_year }}&ndash;{{ current_year }}{% else %}{{ current_year }}{% endif %} {{ site.title }}</span>
+      <div class="footer-links">
+        <a href="{{ "/about" | relative_url }}">About</a>
+        <a href="{{ "/feed.xml" | relative_url }}">RSS</a>
+        <a href="https://github.com/wmora/wmora.github.io">Source</a>
+      </div>
     </footer>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var button = document.getElementById("theme-switch");
+        var label = document.getElementById("theme-switch-label");
+        function render() {
+          label.textContent = root.getAttribute("data-theme");
+        }
+        button.addEventListener("click", function () {
+          var next = root.getAttribute("data-theme") === "terminal" ? "paper" : "terminal";
+          root.setAttribute("data-theme", next);
+          try { localStorage.setItem("theme", next); } catch (e) {}
+          render();
+        });
+        render();
+      })();
+    </script>
   </body>
 </html>
