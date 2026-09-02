@@ -19,15 +19,11 @@
     <div class="screen-overlay"></div>
     <div class="screen-overlay screen-vignette"></div>
     <header class="site-header">
-      <div>
-        <span class="shell-prompt" aria-hidden="true"><span class="shell-user">will@williammora.com</span>:<span class="shell-path">~</span>$</span>
-        <a class="wordmark" href="{{ "/" | relative_url }}"><span class="paper-only">{{ site.title }}</span><span class="terminal-only">{{ site.title | slugify }}</span></a>
-      </div>
-      <div class="header-tools">
-        <nav class="site-nav">
-          <a href="{{ "/" | relative_url }}"{% if page.url == "/" %} class="current"{% endif %}>Home</a>
+      <nav class="site-nav">
+        <a href="{{ "/" | relative_url }}"{% if page.url == "/" %} class="current"{% endif %}>Home</a>
 {% for node in site.pages %}{% if node.title %}<a href="{{ node.url | relative_url }}"{% if page.url == node.url %} class="current"{% endif %}>{{ node.title }}</a>{% endif %}{% endfor %}
-        </nav>
+      </nav>
+      <div class="header-tools">
         {% include contact-links.html %}
         <button class="theme-switch" type="button" id="theme-switch" aria-label="Switch theme">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>

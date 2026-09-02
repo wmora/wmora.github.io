@@ -2,8 +2,8 @@
 layout: blank
 ---
       <section class="hero">
-        <div class="hero-eyebrow"><span class="paper-only">williammora.com</span><span class="terminal-only">$ cat MOTD</span></div>
-        <h1 class="hero-title">Hi, I'm Will.<br>I build things<br>and write it down.<span class="cursor"></span></h1>
+        <div class="hero-eyebrow terminal-only">$ cat MOTD</div>
+        <h1 class="hero-title">Hi, I'm Will.<br>I build things<br>and (sometimes) write it down.<span class="cursor"></span></h1>
         <p class="hero-lede">{{ site.description }} Notes on Android, JavaScript, and game development, kept online as originally published.</p>
         {% include contact-links.html %}
       </section>
@@ -13,7 +13,7 @@ layout: blank
         <a class="button" href="{{ "/feed.xml" | relative_url }}">RSS feed</a>
       </div>
       <section class="notes">
-        <div class="notes-columns"><span>date</span><span>tag</span><span>title</span></div>
+        <div class="notes-columns"><span>date</span><span>title</span></div>
         {% for post in site.posts %}{% include note-card.html post=post %}{% endfor %}
       </section>
       {% include archive-notice.html text="Archive notice. Most of these posts are from 2010 to 2015 and are kept exactly as published. Commands, screenshots, and third-party integrations may no longer match current tools." %}
