@@ -9,7 +9,7 @@ layout: blank
           <div class="post-meta">
             <span>{{ page.date | date: "%b %-d, %Y" }}</span>
             {% if page.author %}<span>&middot;</span><span>{{ page.author }}</span>{% endif %}
-            {% for tag in page.tags %}<span class="note-tag tag-a">{{ tag | downcase }}</span>{% endfor %}
+            {% for tag in page.tags %}<span class="note-tag">{{ tag | downcase }}</span>{% endfor %}
           </div>
           {% endif %}
         </div>

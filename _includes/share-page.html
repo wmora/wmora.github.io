@@ -1,10 +1,11 @@
 {% if page.share == true %}
-  {% assign share_url = page.url | absolute_url %}
+  {% assign share_url = page.url | absolute_url | url_encode %}
+  {% assign share_title = page.title | url_encode %}
   <div class="share-row">
     <span class="share-label">Share</span>
-    <a class="button" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ share_url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow noopener noreferrer" target="_blank" title="Share on X">X</a>
+    <a class="button" href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow noopener noreferrer" target="_blank" title="Share on X">X</a>
     <a class="button" href="https://facebook.com/sharer.php?u={{ share_url }}" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook">Facebook</a>
-    <a class="button" href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url }}&title={{ page.title }}&source={{ page.author }}" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn">LinkedIn</a>
+    <a class="button" href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url }}&title={{ share_title }}&source={{ page.author | url_encode }}" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn">LinkedIn</a>
     <a class="button" href="https://www.reddit.com/submit?url={{ share_url }}" rel="nofollow noopener noreferrer" target="_blank" title="Submit to Reddit">Reddit</a>
     <span class="share-spacer"></span>
     {% if page.next %}<a class="post-next" href="{{ page.next.url | relative_url }}">Next: {{ page.next.title }} &rarr;</a>{% endif %}
