@@ -1,7 +1,6 @@
 ---
 title: About
 share: false
-display_ad: false
 display_donate: false
 ---
 I’m William Mora, a software developer who enjoys building products and writing about the tools I use along the way.

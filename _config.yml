@@ -23,7 +23,6 @@ defaults:
     values:
       layout: "default"
       share: true # Sharing enabled
-      display_ad: true
       display_donate: false
 
 plugins:

@@ -289,7 +289,7 @@ a:hover {
 }
 
 [data-theme="terminal"] .hero-title {
-    font-size: 64px;
+    font-size: 72px;
     line-height: 1.02;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -639,6 +639,11 @@ a:hover {
     font-size: 16px;
 }
 
+[data-theme="terminal"] .post .notice {
+    margin-top: 56px;
+    transform: none;
+}
+
 .post-body {
     margin-top: 40px;
     font-size: 20px;
@@ -710,6 +715,14 @@ a:hover {
     font-size: 0.85em;
 }
 
+.post-body pre code {
+    font-size: inherit;
+}
+
+.post-body a:has(> img) {
+    border-bottom: none;
+}
+
 .post-body table {
     display: block;
     overflow-x: auto;
@@ -759,6 +772,11 @@ a:hover {
     border-bottom: none;
 }
 
+[data-theme="terminal"] .post-body a:hover {
+    color: var(--bg);
+    background: var(--accent);
+}
+
 .share-row {
     display: flex;
     align-items: center;
@@ -804,10 +822,6 @@ a:hover {
     text-align: center;
 }
 
-.post-extras {
-    margin-top: 48px;
-}
-
 .site-footer {
     display: flex;
     justify-content: space-between;
@@ -835,7 +849,7 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .cursor {
+    [data-theme="terminal"] .cursor {
         animation: none;
     }
 
@@ -882,9 +896,17 @@ a:hover {
         padding: 4px 10px;
     }
 
-    .theme-prefix,
     .notes-head .button {
         display: none;
+    }
+
+    .theme-prefix {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
     }
 
     .hero {
