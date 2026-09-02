@@ -53,10 +53,8 @@ Beyond the models, here’s the rest of the development stack:
 - [GitHub Actions](https://github.com/features/actions) to enforce good CI/CD hygiene, including SonarQube analyses
 - [Playwright](https://playwright.dev/) for end-to-end testing
 - [Railway environments](https://docs.railway.com/environments) for:
-
-- Production (obviously). What you see when you open [Shuffled](https://shuffled.app)
-- [PR environments](https://docs.railway.com/environments#pr-environments-1), for testing changes manually before shipping to production. Railway automatically spins up the environment and posts the URL in the PR. Extremely convenient in my workflow and dead simple to set up. 10/10 would recommend
-
+  - Production (obviously). What you see when you open [Shuffled](https://shuffled.app)
+  - [PR environments](https://docs.railway.com/environments#pr-environments-1), for testing changes manually before shipping to production. Railway automatically spins up the environment and posts the URL in the PR. Extremely convenient in my workflow and dead simple to set up. 10/10 would recommend
 - [VSCode](https://code.visualstudio.com/) as my IDE
 
 ### Planning upfront: Early decisions matter
@@ -65,7 +63,7 @@ I spent a significant amount of time upfront crafting specs I was happy with. Pr
 
 I was also very intentional about the design. I even hand-sketched the layout:
 
-![Hand-drawn sketch of the Shuffled layout]({{ page.assets_url }}/layout-sketch.jpeg){:width="420px"}
+![Hand-drawn sketch of the Shuffled layout]({{ page.assets_url }}/layout-sketch.jpeg){:width="420"}
 
 *Don’t hire me for art*
 
