@@ -13,15 +13,6 @@ layout: blank
           </div>
           {% endif %}
         </div>
-        {% if page.date %}
-        {% assign current_year = site.time | date: "%Y" | plus: 0 %}
-        {% assign published_year = page.date | date: "%Y" | plus: 0 %}
-        {% assign years_old = current_year | minus: published_year %}
-        {% if years_old >= 3 %}
-        {% capture archive_text %}Archived note: this post was published in {{ published_year }}. Commands, screenshots, and third-party integrations may no longer match current tools.{% endcapture %}
-        {% include archive-notice.html text=archive_text %}
-        {% endif %}
-        {% endif %}
         <div class="post-body">
           {{ content }}
         </div>

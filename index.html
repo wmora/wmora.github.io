@@ -4,7 +4,7 @@ layout: blank
       <section class="hero">
         <div class="hero-eyebrow terminal-only">$ cat MOTD</div>
         <h1 class="hero-title">Hi, I'm Will.<br>I build things<br>and (sometimes) write.<span class="cursor"></span></h1>
-        <p class="hero-lede">{{ site.description }} Notes on Android, JavaScript, and game development, kept online as originally published.</p>
+        <p class="hero-lede">{{ site.description }}</p>
         {% include contact-links.html %}
       </section>
       <div class="notes-head">
@@ -16,4 +16,3 @@ layout: blank
         <div class="notes-columns"><span>date</span><span>title</span></div>
         {% for post in site.posts %}{% include note-card.html post=post %}{% endfor %}
       </section>
-      {% include archive-notice.html text="Archive notice. Most of these posts are from 2010 to 2015 and are kept exactly as published. Commands, screenshots, and third-party integrations may no longer match current tools." %}
