@@ -6,7 +6,7 @@ tags:
 - ai
 - claude code
 - codex
-- side project
+- software development
 - shuffled
 ---
 
@@ -25,8 +25,8 @@ In terms of my development workflow, I went from _one-session-at-a-time-on-VSCod
 In this model, I find myself running up to 10-15 development tasks efficiently (some very complex, some very straightforward). By development task, I mean some end-to-end problem in which I’m the bottleneck and not necessarily a pure coding task. Mechanical work can easily spawn a lot more agents as long as the guardrails are well defined.
 
 I’m still trying things out and refining my perspective on AI, and I think it’s the main takeaway. Models are getting increasingly better and keep taking on more complex tasks, while at the same time reaching an “intelligence plateau” in which there are tasks I simply know that if I don’t take over the output is a gamble. A few examples:
-* Authority on “business rules” can only come from me. While AI can come up with _a_ solution to a problem, it’s too much of a gamble to let it decide on what the best outcome is. If you are building for fun, prototyping, or working on something low-stakes in general then it’s fine to let AI go wild, but if you are dealing with complex decisions, ambiguity anchored on real-world, managing production data, etc., if I’m not on top of the work, things can really go sideways and ends up being a time sink.
-* Product taste. No amount of written best practices beats human judgement to playing around with a prototype and understanding what works and what doesn’t. This is especially true in my little experience prototyping video games with AI.
+* Authority on “business rules” can only come from me. While AI can come up with _a_ solution to a problem, it’s too much of a gamble to let it decide on what the best outcome is. If I'm building for fun, prototyping, or working on something low-stakes in general then it’s fine to let AI go wild, but if I'm dealing with complex decisions, ambiguity anchored on real-world situations, managing production data, etc., not being on top of the work means things can really go sideways and end up being a time sink.
+* Product taste. No amount of written best practices beats human judgement when playing around with a prototype and understanding what works and what doesn’t. This is especially true in my little experience prototyping video games with AI.
 * Overall system design, quality, and tech stack choices. I’m still on the fence on whether to trust AI more with this one, and maybe it’s a level of abstraction that will evolve as more code is done with AI, but I find there’s a huge amount of over-engineering, siloed choices, and poor judgement that makes it hard to let AI fully solve the harder engineering problems without scratching my head thinking _what were you thinking?_.
 * Writing such as this one :). AI is a good editor to catch obvious mistakes and get feedback on structure, but I heavily dislike AI-generated content that is meant to be read by humans. There is a clear split in content and services that will most likely be consumed by AI agents (in which case, by all means, use AI to optimize for AI) vs humans (in which case, drop the slop).
 
