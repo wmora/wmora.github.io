@@ -4,10 +4,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="{{ site.encoding }}">
     {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
-    <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+    {% assign excerpt_text = page.excerpt | strip_html | normalize_whitespace %}
+    {% if page.description %}
+      {% assign social_description = page.description %}
+    {% elsif excerpt_text.size > 0 %}
+      {% assign social_description = excerpt_text | truncate: 200 %}
+    {% else %}
+      {% assign social_description = site.description %}
+    {% endif %}
+    <meta name="description" content="{{ social_description | escape }}">
     <title>{% if page.title %} {{ page.title }} › {% endif %}{{ site.title }}</title>
     <script>(function(){try{var t=localStorage.getItem("theme");if(t==="terminal"||t==="paper"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
     <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+    <meta property="og:description" content="{{ social_description | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site.twitter_username }}">
+    <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+    <meta name="twitter:description" content="{{ social_description | escape }}">
+    {% if page.image %}<meta name="twitter:image" content="{{ page.image | absolute_url }}">{% endif %}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" type="text/css" href="{{ "/theme.css" | relative_url }}">

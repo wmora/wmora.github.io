@@ -14,6 +14,7 @@ layout: blank
           {% endif %}
         </div>
         <div class="post-body">
+          {% if page.image %}<img class="post-hero" src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
           {{ content }}
         </div>
         {% include share-page.html %}
