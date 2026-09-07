@@ -12,7 +12,7 @@ tags:
 
 It’s been more than a year since I fully transitioned to coding with AI and wanted to post some notes about it. This post is a bit of a braindump; I’ve been meaning to write more often about my experience building with AI this year, but things in the industry have evolved quite fast and I haven’t developed the discipline to keep up with writing about it.
 
-My “AI coding” experience dates back to 2022, first with a mix of GitHub Copilot and ChatGPT which was decent but also it felt more like a Stack Overflow replacement. At the time, I was fortunate to be the Head of Engineering at [Ada](https://www.ada.cx/), an AI-native customer experience company that exposed me to what generative AI had to offer from early on.
+My AI coding experience dates back to 2022, first with a mix of GitHub Copilot and ChatGPT which was decent but also it felt more like a Stack Overflow replacement. At the time, I was fortunate to be the Head of Engineering at [Ada](https://www.ada.cx/), an AI-native customer experience company that exposed me to what generative AI had to offer from early on.
 
 Fast forward to early 2025, I had already transitioned to [Cursor](https://cursor.com/) (at the time, I felt it was a more powerful autocomplete) and decided to try [Cline](https://cline.bot/), coinciding with the release of [Sonnet 3.7](https://www.anthropic.com/news/claude-3-7-sonnet). That was my first experience letting AI build an app while I was ~95% hands off coding. The app was a simple conversational interface to ask questions about a podcast based on its transcripts. While relatively simple, I was pretty convinced that it was doing a much better job than I could at a pace I could never match if I were to design and write everything myself.
 
