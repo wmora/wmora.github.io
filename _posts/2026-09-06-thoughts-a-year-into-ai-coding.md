@@ -1,0 +1,33 @@
+---
+title: "Thoughts a year+ into AI coding"
+date: "2026-09-06"
+author: William Mora
+tags:
+- ai
+- claude code
+- codex
+- side project
+- shuffled
+---
+
+It’s been more than a year since I fully transitioned to coding with AI and wanted to post some notes about it. This post is a bit of a braindump; I’ve been meaning to write more often about my experience building with AI this year, but things in the industry have evolved quite fast and I haven’t developed the discipline to keep up with writing about it.
+
+My “AI coding” experience dates back to 2022, first with a mix of GitHub Copilot and ChatGPT which was decent but also it felt more like a Stack Overflow replacement. At the time, I was fortunate to be the Head of Engineering at [Ada](https://www.ada.cx/), an AI-native customer experience company that exposed me to what generative AI had to offer from early on.
+
+Fast forward to early 2025, I had already transitioned to [Cursor](https://cursor.com/) (at the time, I felt it was a more powerful autocomplete) and decided to try [Cline](https://cline.bot/), coinciding with the release of [Sonnet 3.7](https://www.anthropic.com/news/claude-3-7-sonnet). That was my first experience letting AI build an app while I was ~95% hands off coding. The app was a simple conversational interface to ask questions about a podcast based on its transcripts. While relatively simple, I was pretty convinced that it was doing a much better job than I could at a pace I could never match if I were to design and write everything myself.
+
+Later in 2025, I put together a micro-SaaS as a side project to further test if I could build and fully package a product with AI coding, this time with Claude Code. The end result was [looppractice](https://looppractice.com), in a nutshell, a practice reminder system for guitar and bass players. I have worked on many side projects over my career, but this one was special in the sense that I was able to build more than an MVP on my own quickly and get my first paying customer. It’s still early as a product; I’ve been using it as a personal tool since inception and I have plans to evolve it further to a more complete companion for hobbyist musicians.
+
+In early 2026, I decided to go all in building and exploring how much I can achieve as a product developer using AI. As a result, I was part of the [wave](https://newsletter.pragmaticengineer.com/p/the-great-engineering-leader-career-break) of Head of Engineering/Engineering leads walking away from their roles. Being a builder at heart and having successfully led Ada Engineering through a major AI product and team rebuild, it felt right to step back and spend more time as a developer working on a range of things from hobby apps to more critical products; this also felt like the right move if I ever want to go back to an Engineering leadership role. [I wrote](https://williammora.com/building-shuffled-treating-ai-as-a-team) about my casual word game, [Shuffled](https://shuffled.app), that started as a quick experiment and has been refined a lot since then. As of this writing, I continue working on multiple side projects and consulting during my free time, while also being part of the Product team at [myAbode](https://www.myabode.ca/) working on a new AI product.
+
+In terms of my “agentic development workflow,” I went from _one-session-at-a-time-on-VSCode-with-the-odd-manual-code-change_ to using an orchestrator pattern, first using Conductor and similar tools, but now using [herdr](https://herdr.dev/) and my own orchestrator solution (a similar in nature, but simplified, version of [firstmate](https://github.com/kunchenguid/firstmate)). The main reason I don’t stick to simply using the Claude or Codex desktop apps is that I rely heavily on cross-vendor collaboration for code review (Codex reviews Claude and vice versa), and while right now Fable is my main orchestrator, every now and then I like to switch to a Codex model as my driver while keeping the same dev experience. Overall, I just find it easier to continue adapting my workflow this way while I settle on a specific solution. 
+
+In this model, I find myself running up to 10-15 development tasks efficiently (some very complex, some very straightforward). By development task, I mean some end-to-end problem in which I’m the bottleneck and not necessarily a pure coding task. Mechanical work can easily spawn a lot more agents as long as the guardrails are well defined.
+
+I’m still trying things out and refining my perspective on AI, and I think it’s the main takeaway. Models are getting increasingly better and keep taking on more complex tasks, while at the same time reaching an “intelligence plateau” in which there are tasks I simply know that if I don’t take over the output is a gamble. A few examples:
+* Authority on “business rules” can only come from me. While AI can come up with _a_ solution to a problem, it’s too much of a gamble to let it decide on what the best outcome is. If you are building for fun, prototyping, or working on something low-stakes in general then it’s fine to let AI go wild, but if you are dealing with complex decisions, ambiguity anchored on real-world, managing production data, etc., if I’m not on top of the work, things can really go sideways and ends up being a time sink.
+* Product taste. No amount of written best practices beats human judgement to playing around with a prototype and understanding what works and what doesn’t. This is especially true in my little experience prototyping video games with AI.
+* Overall system design, quality, and tech stack choices. I’m still on the fence on whether to trust AI more with this one, and maybe it’s a level of abstraction that will evolve as more code is done with AI, but I find there’s a huge amount of over-engineering, siloed choices, and poor judgement that makes it hard to let AI fully solve the harder engineering problems without scratching my head thinking _what were you thinking?_.
+* Writing such as this one :). AI is a good editor to catch obvious mistakes and get feedback on structure, but I heavily dislike AI-generated content that is meant to be read by humans. There is a clear split in content and services that will most likely be consumed by AI agents (in which case, by all means, use AI to optimize for AI) vs humans (in which case, drop the slop).
+
+That said, I constantly find AI lets me focus on the bigger picture, learning about the domain problem at hand, and overall gives me more time to think about the problems I find fun as a developer, so excited to see what's ahead. Of course, you may be working on very different problems or codebases, so ymmv. Reach out if you’d like to chat more about any of this.
